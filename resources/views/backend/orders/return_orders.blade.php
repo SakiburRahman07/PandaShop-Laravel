@@ -1,5 +1,6 @@
 @extends('vendor.vendor_dashboard')
 @section('vendor')
+@extends('admin.body.switcher')
 
 <div class="page-content">
 				<!--breadcrumb-->

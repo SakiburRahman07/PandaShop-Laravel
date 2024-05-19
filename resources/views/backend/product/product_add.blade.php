@@ -1,5 +1,7 @@
 @extends('admin.admin_dashboard')
 @section('admin')
+@extends('admin.body.switcher')
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <div class="page-content">
 
@@ -61,8 +63,8 @@
 			  </div>
 
 			   <div class="mb-3">
-				<label for="inputProductDescription" class="form-label">Long Description</label>
-				<textarea id="mytextarea" name="long_descp">Hello, World!</textarea>
+				<label for="longdescription" class="form-label">Long Description</label>
+				<textarea id="longdescription" class="form-control" name="long_descp" rows="7"></textarea>
 			  </div>
 
 

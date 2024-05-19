@@ -124,7 +124,7 @@
                     @if($product->vendor_id == NULL)
 <span class="font-small text-muted">By <a href="vendor-details-1.html">Owner</a></span>
                     @else
-  <span class="font-small text-muted">By <a href="vendor-details-1.html">{{ $product['vendor']['name'] }}</a></span>
+                    <span class="font-small text-muted">By <a href="vendor-details-1.html">{{ $product->vendor->name ?? 'Owner' }}</a></span>
 
                     @endif
                    
@@ -171,8 +171,8 @@
                                 <li class="page-item">
                                     <a class="page-link" href="#"><i class="fi-rs-arrow-small-left"></i></a>
                                 </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item "><a class="page-link" href="#">2</a></li>
                                 <li class="page-item"><a class="page-link" href="#">3</a></li>
                                 <li class="page-item"><a class="page-link dot" href="#">...</a></li>
                                 <li class="page-item"><a class="page-link" href="#">6</a></li>

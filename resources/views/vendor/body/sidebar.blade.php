@@ -27,6 +27,19 @@
 						</div>
 						<div class="menu-title">Dashboard</div>
 					</a>
+					<li>
+					<a href="{{ route('vendor.profile') }}">
+						<div class="parent-icon"><i class="fa-regular fa-user"></i>
+						</div>
+						<div class="menu-title">Profile</div>
+					</a>
+				</li>
+				<li>
+				<a href="{{ route('vendor.change.password') }}">
+						<div class="parent-icon"><i class="fa-solid fa-key"></i>
+						</div>
+						<div class="menu-title">Change Password</div>
+					</a>
 				</li>
 
 
@@ -92,11 +105,11 @@
 		 
 			  
 				<li>
-					<a href=" " target="_blank">
+					<!-- <a href=" " target="_blank">
 						<div class="parent-icon"><i class="bx bx-support"></i>
 						</div>
 						<div class="menu-title">Support</div>
-					</a>
+					</a> -->
 				</li>
 			</ul>
 			<!--end navigation-->

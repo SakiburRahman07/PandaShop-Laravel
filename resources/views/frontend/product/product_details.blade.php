@@ -162,15 +162,17 @@ $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1
     <button type="submit" class="button button-add-to-cart" onclick="addToCartDetails()"><i class="fi-rs-shopping-cart"></i>Add to cart</button>
 
 
-                        <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
-                        <a aria-label="Compare" class="action-btn hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                        <a aria-label="Add To Wishlist" class="action-btn hover-up" id="{{ $product->id }}" onclick="addToWishList(this.id)"><i class="fi-rs-heart"></i></a>
+                        <a aria-label="Compare" class="action-btn hover-up" id="{{ $product->id }}" onclick="addToCompare(this.id)"><i class="fi-rs-shuffle"></i></a>
                     </div>
                 </div>
 
 @if($product->vendor_id == NULL)
 <h6> Sold By <a href="#"> <span class="text-danger"> Owner </span> </a></h6>
 @else
-<h6> Sold By <a href="#"> <span class="text-danger"> {{ $product['vendor']['name'] }} </span></a></h6>
+<h6> Sold By <a href="#">                     <span class="font-small text-muted">By <a href="vendor-details-1.html">{{ $product->vendor->name ?? 'Owner' }}</a></span>
+</a></h6>
+
 @endif
 
 <hr>
@@ -203,7 +205,7 @@ $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1
     <a class="nav-link active" id="Description-tab" data-bs-toggle="tab" href="#Description">Description</a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" id="Additional-info-tab" data-bs-toggle="tab" href="#Additional-info">Additional info</a>
+    <!-- <a class="nav-link" id="Additional-info-tab" data-bs-toggle="tab" href="#Additional-info">Additional info</a> -->
 </li>
 <li class="nav-item">
     <a class="nav-link" id="Vendor-info-tab" data-bs-toggle="tab" href="#Vendor-info">Vendor</a>
@@ -321,7 +323,8 @@ $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1
             </h6>
         	@else
         	<h6>
-                <a href="vendor-details-2.html">{{ $product['vendor']['name'] }}</a>
+            <a href="vendor-details-1.html">{{ $product->vendor->name ?? 'Owner' }}</a>
+
             </h6>
         	@endif
             
@@ -342,6 +345,7 @@ $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1
     	@else
     	 <ul class="contact-infor mb-50">
         <li><img src="{{ asset('frontend/assets/imgs/theme/icons/icon-location.svg') }}" alt="" /><strong>Address: </strong> <span>{{ $product['vendor']['address'] }}</span></li>
+
         <li><img src="{{ asset('frontend/assets/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Contact Seller:</strong><span>{{ $product['vendor']['phone'] }}</span></li>
     </ul>
 
@@ -414,7 +418,7 @@ $reviews = App\Models\Review::where('product_id',$product->id)->latest()->limit(
                 </div>
             </div>
 
-            <div class="col-lg-4">
+            <!-- <div class="col-lg-4">
                 <h4 class="mb-30">Customer reviews</h4>
                 <div class="d-flex mb-30">
                     <div class="product-rate d-inline-block mr-15">
@@ -443,7 +447,7 @@ $reviews = App\Models\Review::where('product_id',$product->id)->latest()->limit(
                     <div class="progress-bar" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
                 </div>
                 <a href="#" class="font-xs text-muted">How are ratings calculated?</a>
-            </div>
+            </div> -->
         </div>
     </div>
 
@@ -552,8 +556,8 @@ $reviews = App\Models\Review::where('product_id',$product->id)->latest()->limit(
             </div>
             <div class="product-action-1">
                 <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-search"></i></a>
-                <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="shop-wishlist.html" tabindex="0"><i class="fi-rs-heart"></i></a>
-                <a aria-label="Compare" class="action-btn small hover-up" href="shop-compare.html" tabindex="0"><i class="fi-rs-shuffle"></i></a>
+                <a aria-label="Add To Wishlist" class="action-btn small hover-up" id="{{ $product->id }}" onclick="addToWishList(this.id)"><i class="fi-rs-heart"></i></a>
+                <a aria-label="Compare" class="action-btn small hover-up"  tabindex="0"id="{{ $product->id }}" onclick="addToCompare(this.id)"><i class="fi-rs-shuffle"></i></a>
             </div>
 
             	 @php

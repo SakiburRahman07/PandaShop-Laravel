@@ -23,7 +23,7 @@
 
 				<li>
 					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class='bx bx-home-circle'></i>
+						<div class="parent-icon"><i class="fa-solid fa-star"></i>
 						</div>
 						<div class="menu-title">Brand</div>
 					</a>
@@ -53,7 +53,7 @@
 
 				<li>
 					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class="bx bx-category"></i>
+						<div class="parent-icon"><i class="fa-solid fa-list"></i>
 						</div>
 						<div class="menu-title">SubCategory</div>
 					</a>
@@ -69,7 +69,7 @@
 
 				<li>
 					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class="bx bx-category"></i>
+						<div class="parent-icon"><i class="fa-solid fa-bars-progress"></i>
 						</div>
 						<div class="menu-title">Product Manage</div>
 					</a>
@@ -84,7 +84,7 @@
 
 				<li>
 					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class="bx bx-category"></i>
+						<div class="parent-icon"><i class="fa-solid fa-sliders"></i>
 						</div>
 						<div class="menu-title">Slider Manage</div>
 					</a>
@@ -99,7 +99,7 @@
 
 				<li>
 					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class="bx bx-category"></i>
+						<div class="parent-icon"><i class="fa-solid fa-signs-post"></i>
 						</div>
 						<div class="menu-title">Banner Manage</div>
 					</a>
@@ -115,7 +115,7 @@
 
 				<li>
 					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class="bx bx-category"></i>
+						<div class="parent-icon"><i class="fa-solid fa-ticket"></i>
 						</div>
 						<div class="menu-title">Coupon System</div>
 					</a>
@@ -131,7 +131,7 @@
 
 				<li>
 					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class="bx bx-category"></i>
+						<div class="parent-icon"><i class="fa-solid fa-truck"></i>
 						</div>
 						<div class="menu-title">Shipping Area </div>
 					</a>
@@ -148,11 +148,11 @@
 				</li>
 
 
-				<li class="menu-label">UI Elements</li>
+				<!-- <li class="menu-label">UI Elements</li> -->
 			
 				<li>
 					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class='bx bx-cart'></i>
+						<div class="parent-icon"><i class="fa-solid fa-house-user"></i>
 						</div>
 						<div class="menu-title">Vendor Manage </div>
 					</a>
@@ -168,7 +168,7 @@
 
 				<li>
 					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class='bx bx-cart'></i>
+						<div class="parent-icon"><i class="fa-solid fa-sort"></i>
 						</div>
 						<div class="menu-title">Order Manage </div>
 					</a>
@@ -191,7 +191,7 @@
 
 				<li>
 					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class='bx bx-cart'></i>
+						<div class="parent-icon"><i class="fa-solid fa-right-left"></i>
 						</div>
 						<div class="menu-title">Return Order </div>
 					</a>
@@ -206,7 +206,7 @@
 
 	<li>
 					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class="bx bx-category"></i>
+						<div class="parent-icon"><i class="fa-solid fa-coins"></i>
 						</div>
 						<div class="menu-title">Reports Manage</div>
 					</a>
@@ -225,7 +225,7 @@
 
 	<li>
 					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class="bx bx-category"></i>
+						<div class="parent-icon"><i class="fa-solid fa-users"></i>
 						</div>
 						<div class="menu-title">User Manage</div>
 					</a>
@@ -244,7 +244,7 @@
 
 				<li>
 					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class="bx bx-category"></i>
+						<div class="parent-icon"><i class="fa-solid fa-blog"></i>
 						</div>
 						<div class="menu-title">Blog Manage</div>
 					</a>
@@ -262,7 +262,7 @@
 
 	<li>
 		<a href="javascript:;" class="has-arrow">
-			<div class="parent-icon"><i class="bx bx-category"></i>
+			<div class="parent-icon"><i class="fa-solid fa-comment"></i>
 			</div>
 			<div class="menu-title">Review Manage</div>
 		</a>
@@ -280,7 +280,7 @@
 				 
 				<li>
 		<a href="javascript:;" class="has-arrow">
-			<div class="parent-icon"><i class="bx bx-category"></i>
+			<div class="parent-icon"><i class="fa-solid fa-gear"></i>
 			</div>
 			<div class="menu-title">Setting Manage</div>
 		</a>
@@ -299,7 +299,7 @@
 
 		<li>
 		<a href="javascript:;" class="has-arrow">
-			<div class="parent-icon"><i class="bx bx-category"></i>
+			<div class="parent-icon"><i class="fa-solid fa-money-bill-trend-up"></i>
 			</div>
 			<div class="menu-title">Stock Manage</div>
 		</a>
@@ -315,7 +315,7 @@
 				 
 			 
 			   
-				<li class="menu-label">Charts & Maps</li>
+				<!-- <li class="menu-label">Charts & Maps</li>
 				<li>
 					<a class="has-arrow" href="javascript:;">
 						<div class="parent-icon"><i class="bx bx-line-chart"></i>
@@ -340,7 +340,7 @@
 						</div>
 						<div class="menu-title">Support</div>
 					</a>
-				</li>
+				</li> -->
 			</ul>
 			<!--end navigation-->
 		</div>

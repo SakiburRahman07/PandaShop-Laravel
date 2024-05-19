@@ -30,6 +30,6 @@ class OrderMail extends Mailable
     public function build()
     {
         $order = $this->data;
-        return $this->from('support@easylearningbd.com')->view('mail.order_mail',compact('order'))->subject('Email From Easy Multi Vendor Shop');
+        return $this->from('support@pandashop.com')->view('mail.order_mail',compact('order'))->subject('Email From by PandaShop');
     }
 }

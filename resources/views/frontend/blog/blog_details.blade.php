@@ -62,11 +62,11 @@
             <!--Entry bottom-->
             <div class="entry-bottom mt-50 mb-30">
                 <div class="tags w-50 w-sm-100">
-                    <a href="blog-category-big.html" rel="tag" class="hover-up btn btn-sm btn-rounded mr-10">deer</a>
+                    <!-- <a href="blog-category-big.html" rel="tag" class="hover-up btn btn-sm btn-rounded mr-10">deer</a>
                     <a href="blog-category-big.html" rel="tag" class="hover-up btn btn-sm btn-rounded mr-10">nature</a>
-                    <a href="blog-category-big.html" rel="tag" class="hover-up btn btn-sm btn-rounded mr-10">conserve</a>
+                    <a href="blog-category-big.html" rel="tag" class="hover-up btn btn-sm btn-rounded mr-10">conserve</a> -->
                 </div>
-                <div class="social-icons single-share">
+                <!-- <div class="social-icons single-share">
                     <ul class="text-grey-5 d-inline-block">
                         <li><strong class="mr-10">Share this:</strong></li>
                         <li class="social-facebook">
@@ -82,10 +82,10 @@
                             <a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt="" /></a>
                         </li>
                     </ul>
-                </div>
+                </div> -->
                                                 </div>
     <!--Author box-->
-    <div class="author-bio p-30 mt-50 border-radius-15 bg-white">
+    <!-- <div class="author-bio p-30 mt-50 border-radius-15 bg-white">
         <div class="author-image mb-30">
             <a href="author.html"><img src="assets/imgs/blog/author-1.png" alt="" class="avatar" /></a>
             <div class="author-infor">
@@ -99,14 +99,14 @@
         <div class="author-des">
             <p>Hi there, I am a veteran food blogger sharing my daily all kinds of healthy and fresh recipes. I find inspiration in nature, on the streets and almost everywhere. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet id enim, libero sit. Est donec lobortis cursus amet, cras elementum libero</p>
         </div>
-    </div>
+    </div> -->
     <!--Comment form-->
     <div class="comment-form">
-        <h3 class="mb-15">Leave a Comment</h3>
-        <div class="product-rate d-inline-block mb-30"></div>
+        <!-- <h3 class="mb-15">Leave a Comment</h3> -->
+        <!-- <div class="product-rate d-inline-block mb-30"></div> -->
         <div class="row">
             <div class="col-lg-9 col-md-12">
-                <form class="form-contact comment_form mb-50" action="#" id="commentForm">
+                <!-- <form class="form-contact comment_form mb-50" action="#" id="commentForm">
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
@@ -132,10 +132,10 @@
                     <div class="form-group">
                         <button type="submit" class="button button-contactForm">Post Comment</button>
                     </div>
-                </form>
+                </form> -->
       <div class="comments-area">
-          <h3 class="mb-30">Comments</h3>
-        <div class="comment-list">
+          <!-- <h3 class="mb-30">Comments</h3> -->
+        <!-- <div class="comment-list">
             <div class="single-comment justify-content-between d-flex mb-30">
        <div class="user justify-content-between d-flex">
    <div class="thumb text-center">
@@ -180,7 +180,7 @@
               </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
+                                                                </div> -->
                                                             </div>
                                                         </div>
                                                     </div>

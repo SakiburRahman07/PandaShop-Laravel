@@ -10,7 +10,7 @@
                         <div class="col-xl-3">
                             <h5 class="mb-15">{{ $breadcat->category_name }}</h5>
                             <div class="breadcrumb">
-                                <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+                                <a href="http://127.0.0.1:8000/" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
                                 <span></span> {{ $breadcat->category_name }} 
                             </div>
                         </div>
@@ -121,7 +121,7 @@
                     @if($product->vendor_id == NULL)
 <span class="font-small text-muted">By <a href="vendor-details-1.html">Owner</a></span>
                     @else
-  <span class="font-small text-muted">By <a href="vendor-details-1.html">{{ $product['vendor']['name'] }}</a></span>
+                    <span class="font-small text-muted">By <a href="vendor-details-1.html">{{ $product->vendor->name ?? 'Owner' }}</a></span>
 
                     @endif
                    
@@ -199,7 +199,7 @@ $products = App\Models\Product::where('category_id',$category->id)->get();
 
 
         <li>
-            <a href="shop-grid-right.html"> <img src=" {{ asset($category->category_image) }} " alt="" />{{ $category->category_name }}</a><span class="count">{{ count($products) }}</span>
+            <a href="{{ url('product/category/'.$category->id.'/'.$category->category_slug) }}"> <img src=" {{ asset($category->category_image) }} " alt="" />{{ $category->category_name }}</a><span class="count">{{ count($products) }}</span>
         </li>
         @endforeach 
                         </ul>

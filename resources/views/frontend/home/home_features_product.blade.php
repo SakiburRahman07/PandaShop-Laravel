@@ -16,7 +16,7 @@ $featured = App\Models\Product::where('featured',1)->orderBy('id','DESC')->limit
                         <div class="banner-img style-2">
                             <div class="banner-text">
                                 <h2 class="mb-100">Bring nature into your home</h2>
-                                <a href="shop-grid-right.html" class="btn btn-xs">Shop Now <i class="fi-rs-arrow-small-right"></i></a>
+                                <a href="{{route('shop.page')}}" class="btn btn-xs">Shop Now <i class="fi-rs-arrow-small-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -112,7 +112,10 @@ $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1
                     </div>
                      
                 </div>
-                <a href="shop-cart.html" class="btn w-100 hover-up"><i class="fi-rs-shopping-cart mr-5"></i>Add To Cart</a>
+                <div class="add-cart">
+                        <a class="add btn w-100 hover-up" href="{{ url('product/details/'.$product->id.'/'.$product->product_slug) }}"><i class="fi-rs-shopping-cart mr-5"></i>Details </a>
+                    </div>
+                <!-- <a href="shop-cart.html" class="btn w-100 hover-up"><i class="fi-rs-shopping-cart mr-5"></i>Add To Cart</a> -->
             </div>
         </div>
         <!--End product Wrap-->

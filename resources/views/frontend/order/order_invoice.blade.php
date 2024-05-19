@@ -47,7 +47,11 @@
   <table width="100%" style="background: #F7F7F7; padding:0 20px 0 20px;">
     <tr>
         <td valign="top">
+        @php
+$setting = App\Models\SiteSetting::find(1);
+        @endphp
           <!-- {{-- <img src="" alt="" width="150"/> --}} -->
+          <!-- <img src="{{ asset($setting->logo)   }}" alt="" height="100" width="180"/> -->
           <h2 style="color: green; font-size: 26px;"><strong>PandaShop</strong></h2>
         </td>
         <td align="right">

@@ -38,8 +38,8 @@
         </div>
         <div class="card-body">
             <p>
-                From your account dashboard. you can easily check &amp; view your <a href="#">recent orders</a>,<br />
-                manage your <a href="#">shipping and billing addresses</a> and <a href="#">edit your password and account details.</a>
+                From your account dashboard. you can easily check &amp; view your <a href="{{route(('user.order.page'))}}">recent orders</a>,<br />
+                manage your <a href="{{route(('user.account.page'))}}">shipping and billing addresses</a> and <a href="{{route(('user.change.password'))}}">edit your password and account details.</a>
             </p>
         </div>
     </div>

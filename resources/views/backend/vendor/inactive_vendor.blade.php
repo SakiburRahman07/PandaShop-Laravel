@@ -1,5 +1,6 @@
 @extends('admin.admin_dashboard')
 @section('admin')
+@extends('admin.body.switcher')
 
 <div class="page-content">
 				<!--breadcrumb-->
@@ -19,6 +20,7 @@
 		 				 
 						</div>
 					</div>
+					
 				</div>
 				<!--end breadcrumb-->
 				 

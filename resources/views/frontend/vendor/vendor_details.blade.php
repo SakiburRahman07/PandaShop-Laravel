@@ -111,9 +111,9 @@
                 <h2><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug) }}"> {{ $product->product_name }} </a></h2>
                 <div class="product-rate-cover">
                     <div class="product-rate d-inline-block">
-                        <div class="product-rating" style="width: 90%"></div>
+                        <!-- <div class="product-rating" style="width: 90%"></div> -->
                     </div>
-                    <span class="font-small ml-5 text-muted"> (4.0)</span>
+                    <!-- <span class="font-small ml-5 text-muted"> (4.0)</span> -->
                 </div>
                 <div>
                     @if($product->vendor_id == NULL)
@@ -166,8 +166,8 @@
                                 <li class="page-item">
                                     <a class="page-link" href="#"><i class="fi-rs-arrow-small-left"></i></a>
                                 </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item "><a class="page-link" href="#">2</a></li>
                                 <li class="page-item"><a class="page-link" href="#">3</a></li>
                                 <li class="page-item"><a class="page-link dot" href="#">...</a></li>
                                 <li class="page-item"><a class="page-link" href="#">6</a></li>
@@ -190,11 +190,11 @@
                                 <span class="text-muted">Since {{ $vendor->vendor_join }}</span>
                             </div>
                             <h4 class="mb-5"><a href="vendor-details-1.html" class="text-heading">{{ $vendor->name }}</a></h4>
-                            <div class="product-rate-cover mb-15">
-                                <div class="product-rate d-inline-block">
-                                    <div class="product-rating" style="width: 90%"></div>
+                            <!-- <div class="product-rate-cover mb-15"> -->
+                                <!-- <div class="product-rate d-inline-block"> -->
+                                    <!-- <div class="product-rating" style="width: 90%"></div> -->
                                 </div>
-                                <span class="font-small ml-5 text-muted"> (4.0)</span>
+                                <!-- <span class="font-small ml-5 text-muted"> (4.0)</span> -->
                             </div>
                             <div class="vendor-des mb-30">
  <p class="font-sm text-heading">{{ $vendor->vendor_short_info }}</p>
@@ -203,22 +203,22 @@
                                 <h6 class="mb-15">Follow Us</h6>
                                 <ul class="social-network">
                                     <li class="hover-up">
-                                        <a href="#">
+                                        <a href="https://twitter.com/">
     <img src="{{ asset('frontend/assets/imgs/theme/icons/social-tw.svg') }}" alt="" />
                                         </a>
                                     </li>
                                     <li class="hover-up">
-                                        <a href="#">
+                                        <a href="https://facebook.com/">
        <img src="{{ asset('frontend/assets/imgs/theme/icons/social-fb.svg') }}" alt="" />
                                         </a>
                                     </li>
                                     <li class="hover-up">
-                                        <a href="#">
+                                        <a href="https://instragram.com/">
     <img src="{{ asset('frontend/assets/imgs/theme/icons/social-insta.svg') }}" alt="" />
                                         </a>
                                     </li>
                                     <li class="hover-up">
-                                        <a href="#">
+                                        <a href="https://in.pinterest.com/">
         <img src="{{ asset('frontend/assets/imgs/theme/icons/social-pin.svg') }}" alt="" />
                                         </a>
                                     </li>

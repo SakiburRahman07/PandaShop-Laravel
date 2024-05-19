@@ -21,20 +21,44 @@ class ShippingAreaController extends Controller
     }// End Method 
 
 
-    public function StoreDivision(Request $request){ 
+    // public function StoreDivision(Request $request){ 
 
+    //     ShipDivision::insert([ 
+    //         'division_name' => $request->division_name, 
+    //     ]);
+
+    //    $notification = array(
+    //         'message' => 'ShipDivision Inserted Successfully',
+    //         'alert-type' => 'success'
+    //     );
+
+    //     return redirect()->route('all.division')->with($notification); 
+
+    // }// End Method 
+
+    public function StoreDivision(Request $request){ 
+        $existingDivision = ShipDivision::where('division_name', $request->division_name)->first();
+    
+        if ($existingDivision) {
+            $notification = array(
+                'message' => 'Division name already exists',
+                'alert-type' => 'error'
+            );
+            return redirect()->route('all.division')->with($notification);
+        }
+    
         ShipDivision::insert([ 
             'division_name' => $request->division_name, 
         ]);
-
-       $notification = array(
+    
+        $notification = array(
             'message' => 'ShipDivision Inserted Successfully',
             'alert-type' => 'success'
         );
-
+    
         return redirect()->route('all.division')->with($notification); 
-
-    }// End Method 
+    }
+    
 
     public function EditDivision($id){
 
@@ -44,23 +68,54 @@ class ShippingAreaController extends Controller
     }// End Method 
 
 
-     public function UpdateDivision(Request $request){
+    //  public function UpdateDivision(Request $request){
 
+    //     $division_id = $request->id;
+
+    //      ShipDivision::findOrFail($division_id)->update([
+    //         'division_name' => $request->division_name,
+    //     ]);
+
+    //    $notification = array(
+    //         'message' => 'ShipDivision Updated Successfully',
+    //         'alert-type' => 'success'
+    //     );
+
+    //     return redirect()->route('all.division')->with($notification); 
+
+
+    // }// End Method 
+
+    public function UpdateDivision(Request $request){
         $division_id = $request->id;
-
-         ShipDivision::findOrFail($division_id)->update([
-            'division_name' => $request->division_name,
+        $newDivisionName = $request->division_name;
+    
+        $division = ShipDivision::findOrFail($division_id);
+    
+        $existingDivision = ShipDivision::where('division_name', $newDivisionName)
+                                         ->where('id', '!=', $division_id)
+                                         ->first();
+    
+        if ($existingDivision) {
+            $notification = array(
+                'message' => 'Division name conflict with another division',
+                'alert-type' => 'error'
+            );
+            return redirect()->route('all.division')->with($notification);
+        }
+    
+        $division->update([
+            'division_name' => $newDivisionName,
         ]);
-
-       $notification = array(
+    
+        $notification = array(
             'message' => 'ShipDivision Updated Successfully',
             'alert-type' => 'success'
         );
-
+    
         return redirect()->route('all.division')->with($notification); 
-
-
-    }// End Method 
+    }
+    
 
 
     public function DeleteDivision($id){
@@ -91,21 +146,48 @@ class ShippingAreaController extends Controller
     }// End Method 
 
 
+// public function StoreDistrict(Request $request){ 
+
+//         ShipDistricts::insert([ 
+//             'division_id' => $request->division_id, 
+//             'district_name' => $request->district_name,
+//         ]);
+
+//        $notification = array(
+//             'message' => 'ShipDistricts Inserted Successfully',
+//             'alert-type' => 'success'
+//         );
+
+//         return redirect()->route('all.district')->with($notification); 
+
+//     }// End Method 
+
 public function StoreDistrict(Request $request){ 
+    $existingDistrict = ShipDistricts::where('district_name', $request->district_name)
+                                     ->where('division_id', $request->division_id)
+                                     ->first();
 
-        ShipDistricts::insert([ 
-            'division_id' => $request->division_id, 
-            'district_name' => $request->district_name,
-        ]);
-
-       $notification = array(
-            'message' => 'ShipDistricts Inserted Successfully',
-            'alert-type' => 'success'
+    if ($existingDistrict) {
+        $notification = array(
+            'message' => 'District name already exists for this division',
+            'alert-type' => 'error'
         );
+        return redirect()->route('all.district')->with($notification);
+    }
 
-        return redirect()->route('all.district')->with($notification); 
+    ShipDistricts::insert([ 
+        'division_id' => $request->division_id, 
+        'district_name' => $request->district_name,
+    ]);
 
-    }// End Method 
+    $notification = array(
+        'message' => 'ShipDistricts Inserted Successfully',
+        'alert-type' => 'success'
+    );
+
+    return redirect()->route('all.district')->with($notification); 
+}
+
 
     public function EditDistrict($id){
         $division = ShipDivision::orderBy('division_name','ASC')->get();
@@ -115,24 +197,59 @@ public function StoreDistrict(Request $request){
     }// End Method 
 
 
+    // public function UpdateDistrict(Request $request){
+
+    //     $district_id = $request->id;
+
+    //      ShipDistricts::findOrFail($district_id)->update([
+    //          'division_id' => $request->division_id, 
+    //         'district_name' => $request->district_name,
+    //     ]);
+
+    //    $notification = array(
+    //         'message' => 'ShipDistricts Updated Successfully',
+    //         'alert-type' => 'success'
+    //     );
+
+    //     return redirect()->route('all.district')->with($notification); 
+
+
+    // }// End Method 
+
     public function UpdateDistrict(Request $request){
-
         $district_id = $request->id;
-
-         ShipDistricts::findOrFail($district_id)->update([
-             'division_id' => $request->division_id, 
-            'district_name' => $request->district_name,
+        $newDistrictName = $request->district_name;
+    
+        // Retrieve the district with the given ID
+        $district = ShipDistricts::findOrFail($district_id);
+    
+        // Check if the new district name conflicts with another district's name
+        $existingDistrict = ShipDistricts::where('district_name', $newDistrictName)
+                                          ->where('id', '!=', $district_id)
+                                          ->where('division_id', $request->division_id)
+                                          ->first();
+    
+        if ($existingDistrict) {
+            $notification = array(
+                'message' => 'District name already exists for this division',
+                'alert-type' => 'error'
+            );
+            return redirect()->route('all.district')->with($notification);
+        }
+    
+        $district->update([
+            'division_id' => $request->division_id, 
+            'district_name' => $newDistrictName,
         ]);
-
-       $notification = array(
+    
+        $notification = array(
             'message' => 'ShipDistricts Updated Successfully',
             'alert-type' => 'success'
         );
-
+    
         return redirect()->route('all.district')->with($notification); 
-
-
-    }// End Method 
+    }
+    
 
 
      public function DeleteDistrict($id){
@@ -171,22 +288,51 @@ public function StoreDistrict(Request $request){
 
     }// End Method 
 
-    public function StoreState(Request $request){ 
+    // public function StoreState(Request $request){ 
 
+    //     ShipState::insert([ 
+    //         'division_id' => $request->division_id, 
+    //         'district_id' => $request->district_id, 
+    //         'state_name' => $request->state_name,
+    //     ]);
+
+    //    $notification = array(
+    //         'message' => 'ShipState Inserted Successfully',
+    //         'alert-type' => 'success'
+    //     );
+
+    //     return redirect()->route('all.state')->with($notification); 
+
+    // }// End Method 
+
+    public function StoreState(Request $request){ 
+        $existingState = ShipState::where('state_name', $request->state_name)
+                                   ->where('division_id', $request->division_id)
+                                   ->where('district_id', $request->district_id)
+                                   ->first();
+    
+        if ($existingState) {
+            $notification = array(
+                'message' => 'State already exists',
+                'alert-type' => 'error'
+            );
+            return redirect()->route('all.state')->with($notification);
+        }
+    
         ShipState::insert([ 
             'division_id' => $request->division_id, 
             'district_id' => $request->district_id, 
             'state_name' => $request->state_name,
         ]);
-
-       $notification = array(
+    
+        $notification = array(
             'message' => 'ShipState Inserted Successfully',
             'alert-type' => 'success'
         );
-
+    
         return redirect()->route('all.state')->with($notification); 
-
-    }// End Method 
+    }
+    
 
     public function EditState($id){
         $division = ShipDivision::orderBy('division_name','ASC')->get();
@@ -196,25 +342,60 @@ public function StoreDistrict(Request $request){
     }// End Method 
 
 
-     public function UpdateState(Request $request){
+    //  public function UpdateState(Request $request){
 
+    //     $state_id = $request->id;
+
+    //      ShipState::findOrFail($state_id)->update([
+    //         'division_id' => $request->division_id, 
+    //         'district_id' => $request->district_id, 
+    //         'state_name' => $request->state_name,
+    //     ]);
+
+    //    $notification = array(
+    //         'message' => 'ShipState Updated Successfully',
+    //         'alert-type' => 'success'
+    //     );
+
+    //     return redirect()->route('all.state')->with($notification); 
+
+
+    // }// End Method 
+
+    public function UpdateState(Request $request){
         $state_id = $request->id;
-
-         ShipState::findOrFail($state_id)->update([
+        $newStateName = $request->state_name;
+    
+        $state = ShipState::findOrFail($state_id);
+    
+        $existingState = ShipState::where('state_name', $newStateName)
+                                   ->where('division_id', $request->division_id)
+                                   ->where('district_id', $request->district_id)
+                                   ->where('id', '!=', $state_id)
+                                   ->first();
+    
+        if ($existingState) {
+            $notification = array(
+                'message' => 'State name already exists for this division and district',
+                'alert-type' => 'error'
+            );
+            return redirect()->route('all.state')->with($notification);
+        }
+    
+        $state->update([
             'division_id' => $request->division_id, 
             'district_id' => $request->district_id, 
-            'state_name' => $request->state_name,
+            'state_name' => $newStateName,
         ]);
-
-       $notification = array(
+    
+        $notification = array(
             'message' => 'ShipState Updated Successfully',
             'alert-type' => 'success'
         );
-
+    
         return redirect()->route('all.state')->with($notification); 
-
-
-    }// End Method 
+    }
+    
 
  public function DeleteState($id){
 

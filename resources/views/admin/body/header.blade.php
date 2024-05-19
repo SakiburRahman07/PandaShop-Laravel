@@ -5,7 +5,7 @@
 					</div>
 					<div class="search-bar flex-grow-1">
 						<div class="position-relative search-bar-box">
-							<input type="text" class="form-control search-control" placeholder="Type to search..."> <span class="position-absolute top-50 search-show translate-middle-y"><i class='bx bx-search'></i></span>
+							<!-- <input type="text" class="form-control search-control" placeholder="Type to search..."> <span class="position-absolute top-50 search-show translate-middle-y"><i class='bx bx-search'></i></span> -->
 							<span class="position-absolute top-50 search-close translate-middle-y"><i class='bx bx-x'></i></span>
 						</div>
 					</div>
@@ -21,34 +21,34 @@
 								<div class="dropdown-menu dropdown-menu-end">
 									<div class="row row-cols-3 g-3 p-3">
 										<div class="col text-center">
-											<div class="app-box mx-auto bg-gradient-cosmic text-white"><i class='bx bx-group'></i>
-											</div>
-											<div class="app-title">Teams</div>
+											<a href="{{ route('vendor.profile') }}" class="app-box mx-auto bg-gradient-cosmic text-white"><i class='bx bx-group'></i>
+</a>
+											<div class="app-title">Profile</div>
 										</div>
 										<div class="col text-center">
-											<div class="app-box mx-auto bg-gradient-burning text-white"><i class='bx bx-atom'></i>
-											</div>
-											<div class="app-title">Projects</div>
+											<a href="{{ route('admin.change.password') }}" class="app-box mx-auto bg-gradient-burning text-white"><i class='bx bx-atom'></i>
+</a>
+											<div class="app-title">Change Password</div>
 										</div>
 										<div class="col text-center">
-											<div class="app-box mx-auto bg-gradient-lush text-white"><i class='bx bx-shield'></i>
-											</div>
-											<div class="app-title">Tasks</div>
+											<a href="{{ route('all.product') }}" class="app-box mx-auto bg-gradient-lush text-white"><i class='bx bx-shield'></i>
+</a>
+											<div class="app-title">Products</div>
 										</div>
 										<div class="col text-center">
-											<div class="app-box mx-auto bg-gradient-kyoto text-dark"><i class='bx bx-notification'></i>
-											</div>
-											<div class="app-title">Feeds</div>
+											<a href="{{ route('pending.order') }}" class="app-box mx-auto bg-gradient-kyoto text-dark"><i class='bx bx-notification'></i>
+</a>
+											<div class="app-title">Orders</div>
 										</div>
 										<div class="col text-center">
-											<div class="app-box mx-auto bg-gradient-blues text-dark"><i class='bx bx-file'></i>
-											</div>
-											<div class="app-title">Files</div>
+											<a href="{{ route('site.setting') }}" class="app-box mx-auto bg-gradient-blues text-dark"><i class='bx bx-file'></i>
+</a>
+											<div class="app-title">Site Setting</div>
 										</div>
 										<div class="col text-center">
-											<div class="app-box mx-auto bg-gradient-moonlit text-white"><i class='bx bx-filter-alt'></i>
-											</div>
-											<div class="app-title">Alerts</div>
+											<a href="{{ route('product.stock') }}" class="app-box mx-auto bg-gradient-moonlit text-white"><i class='bx bx-filter-alt'></i>
+</a>
+											<div class="app-title">Product Stock</div>
 										</div>
 									</div>
 								</div>
@@ -101,9 +101,9 @@ $ncount = Auth::user()->unreadNotifications()->count()
 	</div>
 </li>
 <li class="nav-item dropdown dropdown-large">
-	<a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <span class="alert-count">8</span>
+	<!-- <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <span class="alert-count">8</span>
 		<i class='bx bx-comment'></i>
-	</a>
+	</a> -->
 	<div class="dropdown-menu dropdown-menu-end">
 		<a href="javascript:;">
 			<div class="msg-header">
@@ -277,11 +277,11 @@ $ncount = Auth::user()->unreadNotifications()->count()
 			</li>
 			<li><a class="dropdown-item" href="{{ route('admin.change.password') }}"><i class="bx bx-cog"></i><span>Change Password</span></a>
 			</li>
-			<li><a class="dropdown-item" href="javascript:;"><i class='bx bx-home-circle'></i><span>Dashboard</span></a>
+			<li><a class="dropdown-item" href="{{ route('admin.dashboard') }}"><i class='bx bx-home-circle'></i><span>Dashboard</span></a>
 			</li>
-			<li><a class="dropdown-item" href="javascript:;"><i class='bx bx-dollar-circle'></i><span>Earnings</span></a>
+			<li><a class="dropdown-item" href="{{ route('report.view') }}"><i class='bx bx-dollar-circle'></i><span>Records</span></a>
 			</li>
-			<li><a class="dropdown-item" href="javascript:;"><i class='bx bx-download'></i><span>Downloads</span></a>
+			<li><a class="dropdown-item" href="{{ route('product.stock') }}"><i class="fa-solid fa-money-bill-trend-up"></i></i><span>Product Stock</span></a>
 			</li>
 			<li>
 				<div class="dropdown-divider mb-0"></div>

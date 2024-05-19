@@ -20,23 +20,49 @@ class CouponController extends Controller
     }// End Method 
 
 
-public function StoreCoupon(Request $request){ 
+// public function StoreCoupon(Request $request){ 
 
+//         Coupon::insert([
+//             'coupon_name' => strtoupper($request->coupon_name),
+//             'coupon_discount' => $request->coupon_discount,
+//             'coupon_validity' => $request->coupon_validity,
+//             'created_at' => Carbon::now(),
+//         ]);
+
+//        $notification = array(
+//             'message' => 'Coupon Inserted Successfully',
+//             'alert-type' => 'success'
+//         );
+
+//         return redirect()->route('all.coupon')->with($notification); 
+
+//     }// End Method 
+
+public function StoreCoupon(Request $request) { 
+    $coupon_name = strtoupper($request->coupon_name);
+    $existingCoupon = Coupon::where('coupon_name', $coupon_name)->first();
+
+    if ($existingCoupon) {
+        $notification = array(
+            'message' => 'Coupon already exists',
+            'alert-type' => 'error'
+        );
+    } else {
         Coupon::insert([
-            'coupon_name' => strtoupper($request->coupon_name),
+            'coupon_name' => $coupon_name,
             'coupon_discount' => $request->coupon_discount,
             'coupon_validity' => $request->coupon_validity,
             'created_at' => Carbon::now(),
         ]);
 
-       $notification = array(
+        $notification = array(
             'message' => 'Coupon Inserted Successfully',
             'alert-type' => 'success'
         );
+    }
 
-        return redirect()->route('all.coupon')->with($notification); 
-
-    }// End Method 
+    return redirect()->route('all.coupon')->with($notification); 
+}
 
 
     public function EditCoupon($id){
@@ -47,26 +73,59 @@ public function StoreCoupon(Request $request){
     }// End Method 
 
 
+    // public function UpdateCoupon(Request $request){
+
+    //     $coupon_id = $request->id;
+
+    //      Coupon::findOrFail($coupon_id)->update([
+    //         'coupon_name' => strtoupper($request->coupon_name),
+    //         'coupon_discount' => $request->coupon_discount,
+    //         'coupon_validity' => $request->coupon_validity,
+    //         'created_at' => Carbon::now(),
+    //     ]);
+
+    //    $notification = array(
+    //         'message' => 'Coupon Updated Successfully',
+    //         'alert-type' => 'success'
+    //     );
+
+    //     return redirect()->route('all.coupon')->with($notification); 
+
+
+    // }// End Method 
+
     public function UpdateCoupon(Request $request){
-
         $coupon_id = $request->id;
-
-         Coupon::findOrFail($coupon_id)->update([
-            'coupon_name' => strtoupper($request->coupon_name),
+        $coupon_name = strtoupper($request->coupon_name);
+    
+        // Check if the updated coupon name already exists for another coupon
+        $existingCoupon = Coupon::where('coupon_name', $coupon_name)
+                                 ->where('id', '!=', $coupon_id)
+                                 ->first();
+    
+        if ($existingCoupon) {
+            $notification = array(
+                'message' => 'Coupon name conflict with another coupon',
+                'alert-type' => 'error'
+            );
+            return redirect()->route('all.coupon')->with($notification);
+        }
+    
+        Coupon::findOrFail($coupon_id)->update([
+            'coupon_name' => $coupon_name,
             'coupon_discount' => $request->coupon_discount,
             'coupon_validity' => $request->coupon_validity,
             'created_at' => Carbon::now(),
         ]);
-
-       $notification = array(
+    
+        $notification = array(
             'message' => 'Coupon Updated Successfully',
             'alert-type' => 'success'
         );
-
+    
         return redirect()->route('all.coupon')->with($notification); 
-
-
-    }// End Method 
+    }
+    
 
      public function DeleteCoupon($id){
 

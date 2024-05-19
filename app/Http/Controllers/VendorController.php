@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Hash;
 use App\Notifications\VendorRegNotification;
 use Illuminate\Support\Facades\Notification;
 
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PasswordResetVendor;
+//use Illuminate\Auth\Notifications\ResetPassword;
+use App\Http\Requests\ResetPassword;
+
 class VendorController extends Controller
 {
     public function VendorDashboard()
@@ -132,6 +138,66 @@ public function VendorUpdatePassword(Request $request){
         return redirect()->route('vendor.login')->with($notification);
 
     }// End Mehtod 
+
+    public function VendorForgetPassword()
+    {
+        // Return the password reset form view
+        return view('vendor.vendor_forget_password');
+    }
+
+    public function VendorForgot(Request $request)
+    {
+        // Validate email input
+        $request->validate([
+            'email' => 'required|email'
+        ]);
+    
+        // Retrieve user by email
+        $user = User::where('email', '=', $request->email)->first();
+    
+        if ($user) {
+            // Generate a new token and save it
+            $user->remember_token = Str::random(50);
+            $user->save();
+    
+            // Send password reset email
+            Mail::to($user->email)->send(new PasswordResetVendor($user));
+    
+            // Redirect back with a success message
+            return redirect()->back()->with('status', 'Password reset link sent to your email.');
+        } else {
+            // Redirect back with an error message
+            return redirect()->back()->with('error', 'Email not found.');
+        }
+    }
+
+    public function VendorReset(Request $request, $token)
+    {
+        $user=User::where('remember_token', '=', $token);
+        if($user->count()==0)
+        {
+            abort(403);
+        }
+        $user = $user->first();
+        $data['token'] = $token;
+        
+        return view('vendor.vendor_reset_password', $data);
+    }
+
+    public function postVendorReset($token, ResetPassword $request)
+    {
+        $user = User::where('remember_token', '=', $token);
+        if($user->count()==0)
+        {
+            abort(403);
+        }
+        $user = $user->first();
+        $user->password = Hash::make($request->password);
+        $user->remember_token = Str::random(50);
+        $user->save();
+
+        return redirect('/vendor/login')->with('status', 'Password reset successfully.');
+    }
 
 
 

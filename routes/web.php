@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdvisorController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Backend\BrandController;
@@ -81,6 +82,7 @@ Route::middleware(['auth', 'role:vendor'])->group(function () {
     Route::get('/vendor/change/password', [VendorController::class, 'VendorChangePassword'])->name('vendor.change.password');
     Route::post('/vendor/update/password', [VendorController::class, 'VendorUpdatePassword'])->name('vendor.update.password');
 
+
     // Vendor Add Product All Route 
     Route::controller(VendorProductController::class)->group(function(){
     Route::get('/vendor/all/product' , 'VendorAllProduct')->name('vendor.all.product');
@@ -134,6 +136,15 @@ Route::post('reset_post/{token}', [AdminController::class, 'postAdminReset'])->n
 
 Route::get('/become/vendor', [VendorController::class, 'BecomeVendor'])->name('become.vendor');
 Route::post('/vendor/register', [VendorController::class, 'VendorRegister'])->name('vendor.register');
+
+//vendor forget password
+Route::get('vendor/forgot-password', [VendorController::class, 'VendorForgetPassword'])->name('vendor.forget.password');
+Route::post('forgot_post_vendor', [VendorController::class, 'VendorForgot'])->name('vendor.forgot');
+Route::get('reset/vendor/{token}', [VendorController::class, 'VendorReset'])->name('vendor.reset');
+Route::post('reset_post/vendor/{token}', [VendorController::class, 'postVendorReset'])->name('vendor.reset.post');
+
+
+
 
 
 
@@ -320,6 +331,9 @@ Route::controller(ActiveUserController::class)->group(function(){
 
     Route::get('/all/user' , 'AllUser')->name('all-user');
     Route::get('/all/vendor' , 'AllVendor')->name('all-vendor');
+    Route::get('/delete/userfromadmin/{id}' , 'DeleteUser')->name('delete.userfromadmin');
+    Route::get('/delete/vendorfromadmin/{id}' , 'DeleteVendor')->name('delete.vendorfromadmin');
+
     
  
 });
@@ -531,6 +545,7 @@ Route::get('/minicart/product/remove/{rowId}', [CartController::class, 'RemoveMi
 Route::post('/dcart/data/store/{id}', [CartController::class, 'AddToCartDetails']);
 
 
+//Advisor
 
-
-
+Route::get('/advisor', [AdvisorController::class, 'AdvisorChat'])->name('advisor');
+Route::post('/chat', [AdvisorController::class, '__invoke']);

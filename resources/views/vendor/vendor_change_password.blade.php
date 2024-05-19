@@ -1,5 +1,6 @@
 @extends('vendor.vendor_dashboard')
 @section('vendor')
+@extends('vendor.body.switcher')
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

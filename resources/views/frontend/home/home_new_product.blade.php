@@ -99,7 +99,7 @@ $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1
                     @if($product->vendor_id == NULL)
 <span class="font-small text-muted">By <a href="vendor-details-1.html">Owner</a></span>
                     @else
-  <span class="font-small text-muted">By <a href="vendor-details-1.html">{{ $product['vendor']['name'] }}</a></span>
+  <span class="font-small text-muted">By <a href="vendor-details-1.html">{{ $product->vendor->name ?? 'Owner' }}</a></span>
 
                     @endif
                    
@@ -124,7 +124,7 @@ $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1
 
                      
                     <div class="add-cart">
-                        <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                        <a class="add" href="{{ url('product/details/'.$product->id.'/'.$product->product_slug) }}"><i class="fi-rs-shopping-cart mr-5"></i>Details </a>
                     </div>
                 </div>
             </div>
@@ -201,8 +201,8 @@ $catwiseProduct = App\Models\Product::where('category_id',$category->id)->orderB
                     @if($product->vendor_id == NULL)
 <span class="font-small text-muted">By <a href="vendor-details-1.html">Owner</a></span>
                     @else
-  <span class="font-small text-muted">By <a href="vendor-details-1.html">{{ $product['vendor']['name'] }}</a></span>
-
+                    <span class="font-small text-muted">By <a href="vendor-details-1.html">{{ $product->vendor->name ?? 'Owner' }}</a></span>
+            <!-- vendor name is optional because if vendor is deleted then product will be shown -->
                     @endif
                    
 
@@ -226,7 +226,7 @@ $catwiseProduct = App\Models\Product::where('category_id',$category->id)->orderB
 
                      
                     <div class="add-cart">
-                        <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                        <a class="add" href="{{ url('product/details/'.$product->id.'/'.$product->product_slug) }}"><i class="fi-rs-shopping-cart mr-5"></i>Details </a>
                     </div>
                 </div>
             </div>

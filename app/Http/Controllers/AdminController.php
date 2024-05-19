@@ -164,6 +164,7 @@ class AdminController extends Controller
     }// End Mehtod 
 
 
+    //---------------------------------------------------admin panel er password neye kaj-----------------------------
 
     // In AdminController.php
     public function AdminForgetPassword()
@@ -226,6 +227,8 @@ class AdminController extends Controller
 
         return redirect('/admin/login')->with('status', 'Password reset successfully.');
     }
+
+    
 
 
 

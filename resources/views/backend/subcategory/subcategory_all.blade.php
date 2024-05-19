@@ -1,5 +1,6 @@
 @extends('admin.admin_dashboard')
 @section('admin')
+@extends('admin.body.switcher')
 
 <div class="page-content">
 				<!--breadcrumb-->
@@ -39,7 +40,7 @@
 	@foreach($subcategories as $key => $item)		
 			<tr>
 				<td> {{ $key+1 }} </td>
-				<td> {{ $item['category_name'] }}</td>
+				<td> {{ $item['category']['category_name'] }}</td>
 				<td> {{ $item->subcategory_name }}  </td>
 				
 				<td>

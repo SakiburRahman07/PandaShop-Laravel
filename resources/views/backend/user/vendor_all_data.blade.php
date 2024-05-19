@@ -1,5 +1,6 @@
 @extends('admin.admin_dashboard')
 @section('admin')
+@extends('admin.body.switcher')
 
 <div class="page-content">
 				<!--breadcrumb-->
@@ -50,8 +51,8 @@
 	 <td><span class="badge badge-pill bg-success">{{ $item->status }}</span> </td>
 				
 				<td>
-<a href="{{ route('edit.subcategory',$item->id) }}" class="btn btn-info">Edit</a>
-<a href="{{ route('delete.subcategory',$item->id) }}" class="btn btn-danger" id="delete" >Delete</a>
+				<a href="{{ route('delete.vendorfromadmin',$item->id) }}" class="btn btn-danger" id="delete" >Delete</a>
+
 
 				</td> 
 			</tr>
