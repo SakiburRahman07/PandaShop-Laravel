@@ -32,19 +32,45 @@ use App\Http\Controllers\User\ReviewController;
 use App\Http\Controllers\Backend\SiteSettingController;
 use App\Http\Controllers\Frontend\ShopController;
 use App\Http\Middleware\Role;
+use App\Http\Controllers\CustomAuthenticationController;
 
 // Route::get('/', function () {
 //     return view('frontend.index');
 // });
 
-Route::get('/', [IndexController::class, 'Index']);
+
+Route::get('/userlogin', [CustomAuthenticationController::class, 'userlogin'])->name('userlogin')->middleware('isuserloggedin');
+Route::post('/userloginpost', [CustomAuthenticationController::class, 'userloginpost'])->name('userlogin.post');
+
+Route::get('/userregistration', [CustomAuthenticationController::class, 'userregistration'])->name('userregistration')->middleware('isuserloggedin');
+Route::post('/userregistration', [CustomAuthenticationController::class, 'userregistrationpost'])->name('userregistration.post');
+Route::get('/userlogout', [CustomAuthenticationController::class, 'userlogout'])->name('userlogout');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Route::get('/', [IndexController::class, 'Index'])->name('home');
+Route::get('/dashboard', [UserController::class, 'UserDashboard'])->name('dashboard')->middleware('user');
+Route::post('/user/profile/store', [UserController::class, 'UserProfileStore'])->name('user.profile.store');
+Route::get('/user/logout', [UserController::class, 'UserLogout'])->name('user.logout');
+Route::post('/user/update/password', [UserController::class, 'UserUpdatePassword'])->name('user.update.password');
 
 Route::middleware(['auth', 'verified'])->group(function() {
     
-    Route::get('/dashboard', [UserController::class, 'UserDashboard'])->name('dashboard');
-    Route::post('/user/profile/store', [UserController::class, 'UserProfileStore'])->name('user.profile.store');
-    Route::get('/user/logout', [UserController::class, 'UserLogout'])->name('user.logout');
-    Route::post('/user/update/password', [UserController::class, 'UserUpdatePassword'])->name('user.update.password');
+    // Route::get('/dashboard', [UserController::class, 'UserDashboard'])->name('dashboard');
+    // Route::post('/user/profile/store', [UserController::class, 'UserProfileStore'])->name('user.profile.store');
+    // Route::get('/user/logout', [UserController::class, 'UserLogout'])->name('user.logout');
+    // Route::post('/user/update/password', [UserController::class, 'UserUpdatePassword'])->name('user.update.password');
     
     
     }); // Gorup Milldeware End

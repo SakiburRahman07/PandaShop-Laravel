@@ -44,7 +44,7 @@
          <p class="mb-30">Already have an account? <a href="{{ route('login') }}">Login</a></p>
                                         </div>
 
-                                        <form method="POST" action="{{ route('register') }}">
+                                        <form method="POST" action="{{ route('userregistration.post') }}">
     @csrf
 
     {{-- Display status or error messages from session --}}
