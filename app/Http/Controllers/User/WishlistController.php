@@ -12,12 +12,12 @@ class WishlistController extends Controller
 {
     public function AddToWishList(Request $request, $product_id){
 
-        if (Auth::check()) {
-      $exists = Wishlist::where('user_id',Auth::id())->where('product_id',$product_id)->first();
+        if (session()->has('user_id')) {
+      $exists = Wishlist::where('user_id',session('user_id'))->where('product_id',$product_id)->first();
 
             if (!$exists) {
                Wishlist::insert([
-                'user_id' => Auth::id(),
+                'user_id' => session('user_id'),
                 'product_id' => $product_id,
                 'created_at' => Carbon::now(),
 
@@ -43,7 +43,7 @@ class WishlistController extends Controller
 
     public function GetWishlistProduct(){
 
-        $wishlist = Wishlist::with('product')->where('user_id',Auth::id())->latest()->get();
+        $wishlist = Wishlist::with('product')->where('user_id',session('user_id'))->latest()->get();
 
         $wishQty = wishlist::count(); 
 
@@ -53,7 +53,7 @@ class WishlistController extends Controller
 
     public function WishlistRemove($id){
 
-        Wishlist::where('user_id',Auth::id())->where('id',$id)->delete();
+        Wishlist::where('user_id',session('user_id'))->where('id',$id)->delete();
      return response()->json(['success' => 'Successfully Product Remove' ]);
     }// End Method
 

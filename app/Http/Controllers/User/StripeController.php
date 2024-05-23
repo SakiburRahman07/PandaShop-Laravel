@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Notification;
 class StripeController extends Controller
 {
     public function StripeOrder(Request $request){
-        $user_id = Auth::id();
+        $user_id = session('user_id');
 
         $carts = Cartbox::with('product')->where('user_id', $user_id)->latest()->get();
 
@@ -50,7 +50,7 @@ class StripeController extends Controller
         //dd($charge);
 
         $order_id = Order::insertGetId([
-            'user_id' => Auth::id(),
+            'user_id' => session('user_id'),
             'division_id' => $request->division_id,
             'district_id' => $request->district_id,
             'state_id' => $request->state_id,
@@ -94,7 +94,7 @@ class StripeController extends Controller
 
         // End Send Email
 
-        $carts = Cartbox::with('product')->where('user_id', Auth::id())->latest()->get();
+        $carts = Cartbox::with('product')->where('user_id', session('user_id'))->latest()->get();
         foreach($carts as $cart){
             
             OrderItem::insert([
@@ -137,7 +137,7 @@ class StripeController extends Controller
     }// End Method 
 
     public function CashOrder(Request $request){
-        $user_id = Auth::id();
+        $user_id = session('user_id');
 
         $carts = Cartbox::with('product')->where('user_id', $user_id)->latest()->get();
 
@@ -158,7 +158,7 @@ class StripeController extends Controller
 
         
         $order_id = Order::insertGetId([
-            'user_id' => Auth::id(),
+            'user_id' => session('user_id'),
             'division_id' => $request->division_id,
             'district_id' => $request->district_id,
             'state_id' => $request->state_id,
@@ -203,7 +203,7 @@ class StripeController extends Controller
          // End Send Email
 
         
-        $carts = Cartbox::with('product')->where('user_id', Auth::id())->latest()->get();
+        $carts = Cartbox::with('product')->where('user_id', session('user_id'))->latest()->get();
         foreach($carts as $cart){
             
             OrderItem::insert([

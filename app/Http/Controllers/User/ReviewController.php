@@ -15,7 +15,7 @@ class ReviewController extends Controller
     {
         $product = $request->product_id;
         $vendor = $request->hvendor_id;
-        $userId = Auth::id();
+        $userId = session('user_id');
     
         $request->validate([
             'comment' => 'required',
@@ -113,7 +113,7 @@ class ReviewController extends Controller
 
     public function VendorAllReview(){
 
-        $id = Auth::user()->id;
+        $id = session('user_id');
 
         $review = Review::where('vendor_id',$id)->where('status',1)->orderBy('id','DESC')->get();
         return view('vendor.backend.review.approve_review',compact('review'));
