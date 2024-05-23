@@ -25,7 +25,7 @@ class CheckoutController extends Controller
     }// End Method 
 
     public function CheckoutStore(Request $request){
-
+        $id = session('user_id');
         $data = array();
         $data['shipping_name'] = $request->shipping_name;
         $data['shipping_email'] = $request->shipping_email;
@@ -37,7 +37,7 @@ class CheckoutController extends Controller
         $data['state_id'] = $request->state_id;
         $data['shipping_address'] = $request->shipping_address;
         $data['notes'] = $request->notes; 
-        $carts = Cartbox::with('product')->where('user_id', Auth::id())->latest()->get();
+        $carts = Cartbox::with('product')->where('user_id', $id)->latest()->get();
         $totalPrice = 0;
         
         foreach ($carts as $cart) {
