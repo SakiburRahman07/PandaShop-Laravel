@@ -27,9 +27,10 @@ class CartController extends Controller
 
 
         $product = Product::findOrFail($id);
-
-        if (Auth::check()) {
-            $exists = Cartbox::where('user_id',Auth::id())->where('product_id',$id)->first();
+        $id = session('user_id');
+      //  if (Auth::check()) {
+        if (session()->has('user_id')) {
+            $exists = Cartbox::where('user_id',$id)->where('product_id',$id)->first();
       
                   if (!$exists) {
 
@@ -38,7 +39,7 @@ class CartController extends Controller
                         Cartbox::insert([
             
                             'product_id' => $id,
-                            'user_id' => Auth::id(), 
+                            'user_id' => $id, 
                             'product_name' => $request->product_name,
                             'quantity' => $request->quantity,
                             'price' => $product->selling_price,
@@ -56,7 +57,7 @@ class CartController extends Controller
                         Cartbox::insert([
             
                             'product_id' => $id,
-                            'user_id' => Auth::id(), 
+                            'user_id' => $id, 
                             'product_name' => $request->product_name,
                             'quantity' => $request->quantity,
                             'price' => $product->selling_price,
@@ -92,9 +93,10 @@ class CartController extends Controller
         }
 
         $product = Product::findOrFail($id);
+        $id = session('user_id');
 
-        if (Auth::check()) {
-            $exists = Cartbox::where('user_id',Auth::id())->where('product_id',$id)->first();
+        if (session()->has('user_id')) {
+            $exists = Cartbox::where('user_id',$id)->where('product_id',$id)->first();
       
                   if (!$exists) {
 
@@ -103,7 +105,7 @@ class CartController extends Controller
                         Cartbox::insert([
             
                             'product_id' => $id,
-                            'user_id' => Auth::id(), 
+                            'user_id' => $id, 
                             'product_name' => $request->product_name,
                             'quantity' => $request->quantity,
                             'price' => $product->selling_price,
@@ -121,7 +123,7 @@ class CartController extends Controller
                         Cartbox::insert([
             
                             'product_id' => $id,
-                            'user_id' => Auth::id(), 
+                            'user_id' => $id, 
                             'product_name' => $request->product_name,
                             'quantity' => $request->quantity,
                             'price' => $product->selling_price,
@@ -152,13 +154,14 @@ class CartController extends Controller
     }// End Method
 
     public function AddToCart2(Request $request, $product_id){
+        $id = session('user_id');
 
-        if (Auth::check()) {
-      $exists = Cart::where('user_id',Auth::id())->where('product_id',$product_id)->first();
+        if (session()->has('user_id')) {
+      $exists = Cart::where('user_id',$id)->where('product_id',$product_id)->first();
 
             if (!$exists) {
                Cart::insert([
-                'user_id' => Auth::id(),
+                'user_id' => $id,
                 'product_id' => $product_id,
                 'created_at' => Carbon::now(),
 
@@ -177,13 +180,14 @@ class CartController extends Controller
 
     public function AddMiniCart(){
 
-    
+            $id = session('user_id');
 
-         $carts = Cartbox::with('product')->where('user_id',Auth::id())->latest()->get();
-         $cartQty = Cartbox::with('product')->where('user_id',Auth::id())->count();
+
+         $carts = Cartbox::with('product')->where('user_id',$id)->latest()->get();
+         $cartQty = Cartbox::with('product')->where('user_id',$id)->count();
         // $cartTotal = Cartbox::total();
 
-         $carts = Cartbox::with('product')->where('user_id', Auth::id())->latest()->get();
+         $carts = Cartbox::with('product')->where('user_id', $id)->latest()->get();
 
         $totalPrice=0;
          foreach($carts as $cart){
@@ -200,7 +204,8 @@ class CartController extends Controller
     }// End Method
 
     public function RemoveMiniCart($rowId){
-        Cartbox::where('user_id',Auth::id())->where('id',$rowId)->delete();
+        $id = session('user_id');
+        Cartbox::where('user_id',$id)->where('id',$rowId)->delete();
        
         return response()->json(['success' => 'Product Remove From Cart']);
 
@@ -214,13 +219,14 @@ class CartController extends Controller
 
     public function GetCartProduct(){
 
-    
+            $id = session('user_id');
 
-        $carts = Cartbox::with('product')->where('user_id',Auth::id())->latest()->get();
-        $cartQty = Cartbox::with('product')->where('user_id',Auth::id())->count();
+
+        $carts = Cartbox::with('product')->where('user_id',$id)->latest()->get();
+        $cartQty = Cartbox::with('product')->where('user_id',$id)->count();
        // $cartTotal = Cartbox::total();
 
-        $carts = Cartbox::with('product')->where('user_id', Auth::id())->latest()->get();
+        $carts = Cartbox::with('product')->where('user_id', $id)->latest()->get();
 
        $totalPrice=0;
         foreach($carts as $cart){
@@ -237,8 +243,10 @@ class CartController extends Controller
    }// End Method
 
    public function CartRemove($rowId){
-    Cartbox::where('user_id',Auth::id())->where('id',$rowId)->delete();
-    $user_id = Auth::id();
+           $id = session('user_id');
+
+    Cartbox::where('user_id',$id)->where('id',$rowId)->delete();
+    $user_id = session('user_id');
     
     if (session()->has('coupon')) {
         $coupon_name = session('coupon')['coupon_name'];
@@ -263,8 +271,8 @@ class CartController extends Controller
 
 public function CartDecrement($rowId) {
     // Check if the user is authenticated
-    if (Auth::check()) {
-        $user_id = Auth::id();
+    if (session()->has('user_id')) {
+        $user_id = session('user_id');;
         $cartItem = Cartbox::where('user_id', $user_id)->where('id', $rowId)->first();
    
         if ($cartItem) {
@@ -307,8 +315,8 @@ public function CartDecrement($rowId) {
 
 public function CartIncrement($rowId) {
     // Check if the user is authenticated
-    if (Auth::check()) {
-        $user_id = Auth::id();
+    if (session()->has('user_id')) {
+        $user_id = session('user_id');;
         $cartItem = Cartbox::where('user_id', $user_id)->where('id', $rowId)->first();
    
         if ($cartItem) {
@@ -352,10 +360,11 @@ public function CartIncrement($rowId) {
 
 public function CouponApply(Request $request)
 {
+    $id = session('user_id');
     $coupon = Coupon::where('coupon_name', $request->coupon_name)
                     ->where('coupon_validity', '>=', now()->format('Y-m-d'))
                     ->first();
-    $carts = Cartbox::with('product')->where('user_id', Auth::id())->latest()->get();
+    $carts = Cartbox::with('product')->where('user_id', $id)->latest()->get();
 
     $totalPrice = 0;
     foreach($carts as $cart){
@@ -382,7 +391,8 @@ public function CouponApply(Request $request)
 
 public function CouponCalculation()
 {
-    $carts = Cartbox::with('product')->where('user_id', Auth::id())->latest()->get();
+    $id = session('user_id');
+    $carts = Cartbox::with('product')->where('user_id', $id)->latest()->get();
         $totalPrice = 0;
         
         foreach ($carts as $cart) {
@@ -415,9 +425,10 @@ public function CouponRemove(){
 
 public function CheckoutCreate(){
 
-    if (Auth::check()) {
+    if (session()->has('user_id')) {
+        $id = session('user_id');
 
-        $carts = Cartbox::with('product')->where('user_id', Auth::id())->latest()->get();
+        $carts = Cartbox::with('product')->where('user_id', $id)->latest()->get();
         $totalPrice = 0;
         
         foreach ($carts as $cart) {
@@ -426,9 +437,9 @@ public function CheckoutCreate(){
 
 
         if ($totalPrice > 0) { 
-
-        $carts = Cartbox::with('product')->where('user_id',Auth::id())->latest()->get();
-        $cartQty = Cartbox::with('product')->where('user_id',Auth::id())->count();
+            $id = session('user_id');
+        $carts = Cartbox::with('product')->where('user_id',$id)->latest()->get();
+        $cartQty = Cartbox::with('product')->where('user_id',$id)->count();
 
  
     $cartTotal = $totalPrice;
