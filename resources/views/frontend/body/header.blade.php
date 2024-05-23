@@ -175,7 +175,7 @@ $setting = App\Models\SiteSetting::find(1);
                                     </a>
 
 
-    @auth
+    <!-- @auth
     <a href="{{route('dashboard')}}"><span class="lable ml-0">Account</span></a>
                                     <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
             <ul>
@@ -208,7 +208,40 @@ $setting = App\Models\SiteSetting::find(1);
 
  <a href="{{ route('register') }}"><span class="lable ml-0">Register</span></a>
     
-    @endauth                        
+    @endauth                         -->
+
+    @if(session()->has('user_id'))
+    <a href="{{ route('dashboard') }}"><span class="lable ml-0">Account</span></a>
+    <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
+        <ul>
+            <li>
+                <a href="{{ route('dashboard') }}"><i class="fi fi-rs-user mr-10"></i>My Account</a>
+            </li>
+            <li>
+                <a href="{{ route('user.track.order') }}"><i class="fi fi-rs-location-alt mr-10"></i>Order Tracking</a>
+            </li>
+            <li>
+                <a href="{{ route('mycart') }}"><i class="fi fi-rs-label mr-10"></i>My Cart</a>
+            </li>
+            <li>
+                <a href="{{ route('wishlist') }}"><i class="fi fi-rs-heart mr-10"></i>My Wishlist</a>
+            </li>
+            <li>
+                <a href="{{ route('user.change.password') }}"><i class="fi fi-rs-settings-sliders mr-10"></i>Change Password</a>
+            </li>
+            <li>
+                <a href="{{ route('user.logout') }}"><i class="fi fi-rs-sign-out mr-10"></i>Sign out</a>
+            </li>
+        </ul>
+    </div>
+@else
+    <!-- If the user is not authenticated, you can display an appropriate message or a login link -->
+    <a href="{{ route('userlogin') }}"><span class="lable ml-0">Login</span></a>
+    <span class="lable" style="margin-left: 2px; margin-right: 2px;" > | </span>
+
+<a href="{{ route('userregistration') }}"><span class="lable ml-0">Register</span></a>
+@endif
+
  
 
 

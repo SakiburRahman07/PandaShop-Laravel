@@ -6,14 +6,19 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
     //
     public function UserDashboard(){
 
-        $id = Auth::user()->id;
-        $userData = User::find($id);
+        //$id = Auth::user()->id;
+       // $userData = User::find($id);
+       $userData = array();
+       if(Session::has('user_id')){
+           $userData = User::find(Session::get('user_id'));
+         }
         return view('index',compact('userData'));
 
     } // End Method 
