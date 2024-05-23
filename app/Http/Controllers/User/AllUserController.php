@@ -14,7 +14,8 @@ use Illuminate\Support\Carbon;
 class AllUserController extends Controller
 {
     public function UserAccount(){
-        $id = Auth::user()->id;
+     //   $id = Auth::user()->id;
+        $id = session('user_id');
         $userData = User::find($id);
         return view('frontend.userdashboard.account_details',compact('userData'));
 
@@ -25,14 +26,19 @@ class AllUserController extends Controller
 
 
    public function UserOrderPage(){
-    $id = Auth::user()->id;
+  //  $id = Auth::user()->id;
+  $id = session('user_id');
+
     $orders = Order::where('user_id',$id)->orderBy('id','DESC')->get();
       return view('frontend.userdashboard.user_order_page',compact('orders'));
 }// End Method 
 
 public function UserOrderDetails($order_id){
 
-    $order = Order::with('division','district','state','user')->where('id',$order_id)->where('user_id',Auth::id())->first();
+    $id = session('user_id');
+    $order = Order::with('division','district','state','user')->where('id',$order_id)->where('user_id',$id)->first();
+
+   // $order = Order::with('division','district','state','user')->where('id',$order_id)->where('user_id',Auth::id())->first();
     $orderItem = OrderItem::with('product')->where('order_id',$order_id)->orderBy('id','DESC')->get();
 
     return view('frontend.order.order_details',compact('order','orderItem'));
@@ -41,7 +47,9 @@ public function UserOrderDetails($order_id){
 
 public function UserOrderInvoice($order_id){
 
-    $order = Order::with('division','district','state','user')->where('id',$order_id)->where('user_id',Auth::id())->first();
+    $id = session('user_id');
+    $order = Order::with('division','district','state','user')->where('id',$order_id)->where('user_id',$id)->first();
+    //$order = Order::with('division','district','state','user')->where('id',$order_id)->where('user_id',Auth::id())->first();
     $orderItem = OrderItem::with('product')->where('order_id',$order_id)->orderBy('id','DESC')->get();
 
     $pdf = Pdf::loadView('frontend.order.order_invoice', compact('order','orderItem'))->setPaper('a4')->setOption([
@@ -70,8 +78,9 @@ public function ReturnOrder(Request $request,$order_id){
 }// End Method 
 
 public function ReturnOrderPage(){
-
-    $orders = Order::where('user_id',Auth::id())->where('return_reason','!=',NULL)->orderBy('id','DESC')->get();
+    $id = session('user_id');
+    $orders = Order::where('user_id',$id)->where('return_reason','!=',NULL)->orderBy('id','DESC')->get();
+  //  $orders = Order::where('user_id',Auth::id())->where('return_reason','!=',NULL)->orderBy('id','DESC')->get();
     return view('frontend.order.return_order_view',compact('orders'));
 
 }// End Method 

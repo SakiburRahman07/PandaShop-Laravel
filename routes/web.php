@@ -65,6 +65,7 @@ Route::post('/user/profile/store', [UserController::class, 'UserProfileStore'])-
 Route::get('/user/logout', [UserController::class, 'UserLogout'])->name('user.logout');
 Route::post('/user/update/password', [UserController::class, 'UserUpdatePassword'])->name('user.update.password');
 
+
 Route::middleware(['auth', 'verified'])->group(function() {
     
     // Route::get('/dashboard', [UserController::class, 'UserDashboard'])->name('dashboard');
@@ -537,7 +538,16 @@ Route::controller(StripeController::class)->group(function(){
 
 }); 
 
- // User Dashboard All Route 
+
+
+
+   
+   
+   
+   }); // end group user middleware
+
+
+    // User Dashboard All Route 
  Route::controller(AllUserController::class)->group(function(){
     Route::get('/user/account/page' , 'UserAccount')->name('user.account.page');
     Route::get('/user/change/password' , 'UserChangePassword')->name('user.change.password');
@@ -552,12 +562,6 @@ Route::controller(StripeController::class)->group(function(){
   
 
 }); 
-
-
-   
-   
-   
-   }); // end group user middleware
 
 /// add to cart 
 Route::post('/add-to-cart/{product_id}', [CartController::class, 'AddToCart2']);
