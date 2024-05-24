@@ -88,13 +88,16 @@ public function VendorUpdatePassword(Request $request){
             'new_password' => 'required|confirmed', 
         ]);
 
+        $id = session('vendor_id');
+        $vendor = \App\Models\User::find($id);
+
         // Match The Old Password
-        if (!Hash::check($request->old_password, auth::user()->password)) {
+        if (!Hash::check($request->old_password, $vendor->password)) {
             return back()->with("error", "Old Password Doesn't Match!!");
         }
 
         // Update The new password 
-        User::whereId(auth()->user()->id)->update([
+        User::whereId($id)->update([
             'password' => Hash::make($request->new_password)
 
         ]);

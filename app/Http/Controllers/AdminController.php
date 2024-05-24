@@ -87,13 +87,17 @@ class AdminController extends Controller
             'new_password' => 'required|confirmed', 
         ]);
 
+        $id = session('admin_id');
+        $admin = \App\Models\User::find($id);
+
         // Match The Old Password
-        if (!Hash::check($request->old_password, auth::user()->password)) {
+        if (!Hash::check($request->old_password, $admin->password)) {
             return back()->with("error", "Old Password Doesn't Match!!");
         }
+        $id = session('admin_id');
 
         // Update The new password 
-        User::whereId(auth()->user()->id)->update([
+        User::whereId($id)->update([
             'password' => Hash::make($request->new_password)
 
         ]);
