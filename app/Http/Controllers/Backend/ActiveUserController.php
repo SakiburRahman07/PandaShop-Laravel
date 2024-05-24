@@ -9,6 +9,7 @@ use App\Models\User;
 class ActiveUserController extends Controller
 {
     public function AllUser(){
+        
         $users = User::where('role','user')->latest()->get();
         return view('backend.user.user_all_data',compact('users'));
 
