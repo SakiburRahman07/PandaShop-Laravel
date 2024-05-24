@@ -33,8 +33,55 @@
                                     <th scope="col" class="end">Remove</th>
                                 </tr>
                             </thead>
-                            <tbody id="wishlist">
-                                
+                            @foreach($wishlist as $wish)
+    @if($wish->product)  {{-- Check if the product relation is not null --}}
+        <tr class="pt-30">
+            <td class="custome-checkbox pl-30"></td>
+            <td class="image product-thumbnail pt-40">
+                <img src="{{ $wish->product->product_thambnail }}" alt="#" />
+            </td>
+            <td class="product-des product-name">
+                <h6><a class="product-name mb-10" href="shop-product-right.html">{{ $wish->product->product_name }}</a></h6>
+                <div class="product-rate-cover">
+                    <div class="product-rate d-inline-block">
+                        <div class="product-rating" style="width: 90%"></div>
+                    </div>
+                    <span class="font-small ml-5 text-muted"> (4.0)</span>
+                </div>
+            </td>
+            <td class="price" data-title="Price">
+                @if($wish->product->discount_price != null)
+                    <h3 class="text-brand">{{ $wish->product->discount_price }}</h3>
+                @else
+                    <h3 class="text-brand">{{ $wish->product->product_price }}</h3>
+                @endif
+            </td>
+            <td class="text-center detail-info" data-title="Stock">
+                @if($wish->product->product_qty > 0)
+                    <span class="stock-status in-stock mb-0"> In Stock </span>
+                @else
+                    <span class="stock-status out-stock mb-0">Stock Out </span>
+                @endif
+            </td>
+            <td class="action text-center" data-title="Remove">
+                <form action="{{ route('wishlist.remove', $wish->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="text-body" onclick="return confirm('Are you sure you want to remove this item from your wishlist?')">
+                        <i class="fi-rs-trash"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+    @else
+        <tr class="pt-30">
+            <td colspan="6" class="text-center">Product no longer available</td>
+        </tr>
+    @endif
+@endforeach
+
+
+
 
 
 
