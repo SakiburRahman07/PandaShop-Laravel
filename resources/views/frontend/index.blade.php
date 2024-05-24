@@ -696,7 +696,7 @@ $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1
         <!--End 4 columns-->
 
  
-  <!--Vendor List -->
+  <!--Vendor List here -->
 
 @include('frontend.home.home_vendor_list')
 
