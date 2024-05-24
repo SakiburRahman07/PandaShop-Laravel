@@ -45,7 +45,6 @@ Route::get('/userregistration', [CustomAuthenticationController::class, 'userreg
 Route::post('/userregistration', [CustomAuthenticationController::class, 'userregistrationpost'])->name('userregistration.post');
 Route::get('/userlogout', [CustomAuthenticationController::class, 'userlogout'])->name('userlogout');
 
-
 Route::get('/adminLogin', [CustomAuthenticationController::class, 'adminlogin'])->name('adminlogin');
 Route::post('/adminloginpost', [CustomAuthenticationController::class, 'adminloginpost'])->name('adminlogin.post');
 Route::get('/adminlogout', [CustomAuthenticationController::class, 'adminlogout'])->name('adminlogout');
