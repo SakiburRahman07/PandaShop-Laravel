@@ -77,13 +77,16 @@ class UserController extends Controller
             'new_password' => 'required|confirmed', 
         ]);
 
+        $id = session('user_id');
+        $user = \App\Models\User::find($id);
+
         // Match The Old Password
-        if (!Hash::check($request->old_password, auth::user()->password)) {
+        if (!Hash::check($request->old_password, $user->password)) {
             return back()->with("error", "Old Password Doesn't Match!!");
         }
 
         // Update The new password 
-        User::whereId(auth()->user()->id)->update([
+        User::whereId($id)->update([
             'password' => Hash::make($request->new_password)
 
         ]);
