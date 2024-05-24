@@ -92,7 +92,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 <script>
- @if(Session::has('message'))
+ @if(Session()->has('message'))
  var type = "{{ Session::get('alert-type','info') }}"
  switch(type){
     case 'info':

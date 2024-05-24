@@ -18,74 +18,42 @@ use App\Models\ShipDivision;
 class CartController extends Controller
 {
 
-    public function AddToCart(Request $request, $id){
+  public function AddToCart(Request $request, $id)
+{
+    if (session()->has('coupon')) {
+        session()->forget('coupon');
+    }
 
-        if(session()->has('coupon')){
-            session()->forget('coupon');
+    $product = Product::findOrFail($id);
+    $user_id = session('user_id');
+    
+    if (session()->has('user_id')) {
+        $exists = Cartbox::where('user_id', $user_id)->where('product_id', $id)->first();
+
+        if (!$exists) {
+            $price = $product->discount_price ?? $product->selling_price;
+
+            Cartbox::create([
+                'product_id' => $id,
+                'user_id' => $user_id,
+                'product_name' => $request->product_name,
+                'quantity' => $request->quantity,
+                'price' => $price,
+                'image' => $product->product_thambnail,
+                'color' => $request->color,
+                'size' => $request->size,
+                'vendor_id' => $request->vendor_id,
+            ]);
+
+            return response()->json(['success' => 'Successfully Added to Your Cart']);
+        } else {
+            return response()->json(['error' => 'This Product is Already in Your Cart']);
         }
+    } else {
+        return response()->json(['error' => 'Please log in to your account first']);
+    }
+}
 
-
-
-        $product = Product::findOrFail($id);
-        $id = session('user_id');
-      //  if (Auth::check()) {
-        if (session()->has('user_id')) {
-            $exists = Cartbox::where('user_id',$id)->where('product_id',$id)->first();
-      
-                  if (!$exists) {
-
-                    if ($product->discount_price == NULL) {
-
-                        Cartbox::insert([
-            
-                            'product_id' => $id,
-                            'user_id' => $id, 
-                            'product_name' => $request->product_name,
-                            'quantity' => $request->quantity,
-                            'price' => $product->selling_price,
-                            'image' => $product->product_thambnail,
-                            'color' => $request->color,
-                            'size' => $request->size,
-                            'vendor_id' => $request->vendor_id,
-                            
-                        ]);
-            
-               return response()->json(['success' => 'Successfully Added on Your Cart' ]);
-            
-                    }else{
-            
-                        Cartbox::insert([
-            
-                            'product_id' => $id,
-                            'user_id' => $id, 
-                            'product_name' => $request->product_name,
-                            'quantity' => $request->quantity,
-                            'price' => $product->selling_price,
-                            'image' => $product->product_thambnail,
-                            'color' => $request->color,
-                            'size' => $request->size,
-                            'vendor_id' => $request->vendor_id,
-                        ]);
-            
-               return response()->json(['success' => 'Successfully Added on Your Cart' ]);
-            
-                    }
-                   
-                    
-
-                     return response()->json(['success' => 'Successfully Added On Your Cart' ]);
-                  } else{
-                      return response()->json(['error' => 'This Product Has Already on Your Cart' ]);
-      
-                  } 
-      
-              }else{
-                  return response()->json(['error' => 'At First Login Your Account' ]);
-              }
-
-
-
-    }// End Method
 
     public function AddToCartDetails(Request $request, $id){
         if(session()->has('coupon')){
@@ -93,10 +61,10 @@ class CartController extends Controller
         }
 
         $product = Product::findOrFail($id);
-        $id = session('user_id');
+        $user_id = session('user_id');
 
         if (session()->has('user_id')) {
-            $exists = Cartbox::where('user_id',$id)->where('product_id',$id)->first();
+            $exists = Cartbox::where('user_id',$user_id)->where('product_id',$id)->first();
       
                   if (!$exists) {
 
@@ -105,7 +73,7 @@ class CartController extends Controller
                         Cartbox::insert([
             
                             'product_id' => $id,
-                            'user_id' => $id, 
+                            'user_id' => $user_id, 
                             'product_name' => $request->product_name,
                             'quantity' => $request->quantity,
                             'price' => $product->selling_price,
@@ -123,7 +91,7 @@ class CartController extends Controller
                         Cartbox::insert([
             
                             'product_id' => $id,
-                            'user_id' => $id, 
+                            'user_id' => $user_id, 
                             'product_name' => $request->product_name,
                             'quantity' => $request->quantity,
                             'price' => $product->selling_price,

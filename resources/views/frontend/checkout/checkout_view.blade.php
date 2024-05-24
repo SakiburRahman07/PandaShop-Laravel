@@ -6,6 +6,14 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+@php
+        
+        $userId = session('user_id');
+
+        
+        $user = \App\Models\User::find($userId);
+    @endphp
+
  <div class="page-header breadcrumb-wrap">
             <div class="container">
                 <div class="breadcrumb">
@@ -33,10 +41,10 @@
 
             <div class="row">
                 <div class="form-group col-lg-6">
-                    <input type="text" required="" name="shipping_name" value="{{ Auth::user()->name }}" >
+                    <input type="text" required="" name="shipping_name" value="{{ $user->name }}" >
                 </div>
                 <div class="form-group col-lg-6">
-                    <input type="email" required="" name="shipping_email" value="{{ Auth::user()->email }}">
+                    <input type="email" required="" name="shipping_email" value="{{ $user->email }}">
                 </div>
             </div>
                            
@@ -55,7 +63,7 @@
 	        </div>
 	    </div>
         <div class="form-group col-lg-6">
-      <input required="" type="text" name="shipping_phone" value="{{ Auth::user()->phone }}">
+      <input required="" type="text" name="shipping_phone" value="{{ $user->phone }}">
                                 </div>
                             </div>
 
@@ -86,7 +94,7 @@
         </div>
     </div>
                                 <div class="form-group col-lg-6">
-      <input required="" type="text" name="shipping_address" placeholder="Address *" value="{{ Auth::user()->address }}">
+      <input required="" type="text" name="shipping_address" placeholder="Address *" value="{{ $user->address }}">
                                 </div>
                             </div>
 

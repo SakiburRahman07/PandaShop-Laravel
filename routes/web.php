@@ -76,17 +76,17 @@ Route::middleware(['auth', 'verified'])->group(function() {
     
     }); // Gorup Milldeware End
 
-Route::middleware('auth' , 'verified')->group(function () {
+//Route::middleware('auth' , 'verified')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+//});
 
 require __DIR__.'/authentication.php';
 
 //admin dashboard
 
-Route::middleware(['auth', 'role:admin'])->group(function () {
+//Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
 
     Route::get('/admin/logout', [AdminController::class, 'AdminDestroy'])->name('admin.logout');
@@ -95,13 +95,13 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/change/password', [AdminController::class, 'AdminChangePassword'])->name('admin.change.password');
     Route::post('/admin/update/password', [AdminController::class, 'AdminUpdatePassword'])->name('update.password');
 
-});
+//});
 
 
 
 //vendor dashboard
 
-Route::middleware(['auth', 'role:vendor'])->group(function () {
+//Route::middleware(['auth', 'role:vendor'])->group(function () {
     Route::get('/vendor/dashboard', [VendorController::class, 'VendorDashboard'])->name('vendor.dashboard');
     Route::get('/vendor/logout', [VendorController::class, 'VendorDestroy'])->name('vendor.logout');
     Route::get('/vendor/profile', [VendorController::class, 'VendorProfile'])->name('vendor.profile');
@@ -128,7 +128,7 @@ Route::middleware(['auth', 'role:vendor'])->group(function () {
     Route::get('/vendor/delete/product/{id}' , 'VendorProductDelete')->name('vendor.delete.product');
     Route::get('/vendor/subcategory/ajax/{category_id}' , 'VendorGetSubCategory');
 
-});
+//});
 
 
      // vendor order controller  
@@ -176,7 +176,7 @@ Route::post('reset_post/vendor/{token}', [VendorController::class, 'postVendorRe
 
 
 
-Route::middleware(['auth','role:admin'])->group(function() {
+//Route::middleware(['auth','role:admin'])->group(function() {
 
 
     // Brand All Route 
@@ -428,7 +428,7 @@ Route::controller(SiteSettingController::class)->group(function(){
    
    
    
-   }); // End Middleware admin
+   //}); // End Middleware admin
 
    /// Frontend Product Details All Route 
 
@@ -499,16 +499,18 @@ Route::controller(ShopController::class)->group(function(){
    
 
 /// User All Route
-Route::middleware(['auth','role:user'])->group(function() {
+//Route::middleware(['auth','role:user'])->group(function() {
 
     // Wishlist All Route 
    Route::controller(WishlistController::class)->group(function(){
        Route::get('/wishlist' , 'AllWishlist')->name('wishlist');
        Route::get('/get-wishlist-product' , 'GetWishlistProduct');
-       Route::get('/wishlist-remove/{id}' , 'WishlistRemove');
+     //  Route::get('/wishlist-remove/{id}' , 'WishlistRemove');
+       Route::delete('/wishlist-remove/{id}', 'wishlistRemove')->name('wishlist.remove');
+
 
    
-   }); 
+  // }); 
 
     // Compare All Route 
 Route::controller(CompareController::class)->group(function(){

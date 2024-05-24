@@ -119,7 +119,7 @@ $setting = App\Models\SiteSetting::find(1);
                     <a href="{{ route('wishlist') }}">
                         <img class="svgInject" alt="Nest" src="{{ asset('frontend/assets/imgs/theme/icons/icon-heart.svg') }}" />
                         @php
-                        $wishlist = App\Models\Wishlist::where('user_id',Illuminate\Support\Facades\Auth::id())->get();
+                        $wishlist = App\Models\Wishlist::where('user_id',session('user_id'))->get();
                         @endphp
                         <span class="pro-count blue" id="wishQty">{{count($wishlist)}} </span>
                     </a>
@@ -133,7 +133,7 @@ $setting = App\Models\SiteSetting::find(1);
                     <a class="mini-cart-icon" href="shop-cart.html">
                         <img alt="Nest" src="{{ asset('frontend/assets/imgs/theme/icons/icon-cart.svg') }}" />
                         @php
-                        $cart = App\Models\Cart::where('user_id',Auth::id())->get();
+                        $cart = App\Models\Cart::where('user_id',session('user_id'))->get();
                         @endphp
                         <span class="pro-count blue" id="cartQty">0</span>
                     </a>
@@ -386,7 +386,7 @@ $setting = App\Models\SiteSetting::find(1);
             <a href="{{route('wishlist')}}">
                 <img alt="Nest" src="{{ asset('frontend/assets/imgs/theme/icons/icon-heart.svg') }}" />
                 @php
-                        $wishlist = App\Models\Wishlist::where('user_id',Auth::id())->get();
+                        $wishlist = App\Models\Wishlist::where('user_id',session('user_id'))->get();
                         @endphp
                 <span class="pro-count white">{{count($wishlist)}}</span>
             </a>
@@ -399,7 +399,7 @@ $setting = App\Models\SiteSetting::find(1);
                         $currentDate = Carbon::today()->toDateString();
 
 
-    $cart = App\Models\Cart::where('user_id', Auth::id())
+    $cart = App\Models\Cart::where('user_id', session('user_id'))
     ->whereDate('created_at', $currentDate)
     ->get();
                         @endphp
