@@ -41,7 +41,7 @@ use App\Http\Controllers\CustomAuthenticationController;
 
 Route::get('/userlogin', [CustomAuthenticationController::class, 'userlogin'])->name('userlogin')->middleware('isuserloggedin');
 Route::post('/userloginpost', [CustomAuthenticationController::class, 'userloginpost'])->name('userlogin.post');
-Route::get('/userregistration', [CustomAuthenticationController::class, 'userregistration'])->name('userregistration')->middleware('isuserloggedin');
+Route::get('/userregistration', [CustomAuthenticationController::class, 'userregistration'])->name('userregistration');
 Route::post('/userregistration', [CustomAuthenticationController::class, 'userregistrationpost'])->name('userregistration.post');
 Route::get('/userlogout', [CustomAuthenticationController::class, 'userlogout'])->name('userlogout');
 
@@ -69,7 +69,7 @@ Route::get('/vendorlogout', [CustomAuthenticationController::class, 'vendorlogou
 
 
 
-Route::middleware([ 'isuserloggedin' , 'user'])->group(function() {
+Route::middleware([ 'isuserloggedin' ])->group(function() {
 
 
 Route::get('/', [IndexController::class, 'Index'])->name('home');
@@ -101,7 +101,7 @@ require __DIR__.'/authentication.php';
 //admin dashboard
 
 //Route::middleware(['admin' ,'isadminloggedin'])->group(function () {
-    Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
+    Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard')->middleware('admin');
 
     Route::get('/admin/logout', [AdminController::class, 'AdminDestroy'])->name('admin.logout');
     Route::get('/admin/profile', [AdminController::class, 'AdminProfile'])->name('admin.profile');
@@ -167,7 +167,7 @@ Route::controller(ReviewController::class)->group(function(){
 });
  //end vendor group middleware 
 
-Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');
+Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login')->middleware('isadminloggedin');
 Route::get('/vendor/login', [VendorController::class, 'VendorLogin'])->name('vendor.login');
 
 Route::get('admin/forgot-password', [AdminController::class, 'AdminForgetPassword'])->name('admin.forget.password');

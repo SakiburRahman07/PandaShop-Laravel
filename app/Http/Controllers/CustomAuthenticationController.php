@@ -61,7 +61,7 @@ class CustomAuthenticationController extends Controller
         }
     }
 
-    public function registrationpost(Request $request)
+    public function userregistrationpost(Request $request)
     {
         $request->validate([
             'name' => 'required',
