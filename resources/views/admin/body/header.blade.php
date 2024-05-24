@@ -56,7 +56,13 @@
 							<li class="nav-item dropdown dropdown-large">
 								<a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <span class="alert-count">
 @php
-$ncount = Auth::user()->unreadNotifications()->count()
+
+    $adminId = session('admin_id');
+
+   
+    $admin = \App\Models\User::find($adminId);
+
+    $ncount = $admin ? $admin->unreadNotifications()->count() : 0;
 @endphp
 {{ $ncount }}
 
@@ -74,7 +80,9 @@ $ncount = Auth::user()->unreadNotifications()->count()
 
 			 
 			 @php
-			 $user = Auth::user();
+			 $adminId = session('admin_id');
+   			 $user = \App\Models\User::find($adminId);
+			
 			 @endphp
 		 
 		 @forelse($user->notifications as $notification)
@@ -255,7 +263,9 @@ $ncount = Auth::user()->unreadNotifications()->count()
 
 
 	@php
-	    $id = Auth::user()->id;
+	$id = session('admin_id');
+
+	  
         $adminData = App\Models\User::find($id);
 	
 	@endphp				
@@ -268,8 +278,12 @@ $ncount = Auth::user()->unreadNotifications()->count()
 
 
 							<div class="user-info ps-3">
-		<p class="user-name mb-0">{{ Auth::user()->name }}</p>
-		<p class="designattion mb-0">{{ Auth::user()->username }}</p>
+								@php 
+								$adminId = session('admin_id');
+   								 $user = \App\Models\User::find($adminId);
+								@endphp
+		<p class="user-name mb-0">{{ $user->name }}</p>
+		<p class="designattion mb-0">{{ $user->username }}</p>
 							</div>
 						</a>
 		<ul class="dropdown-menu dropdown-menu-end">

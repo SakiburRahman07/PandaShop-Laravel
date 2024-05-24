@@ -41,12 +41,14 @@ use App\Http\Controllers\CustomAuthenticationController;
 
 Route::get('/userlogin', [CustomAuthenticationController::class, 'userlogin'])->name('userlogin')->middleware('isuserloggedin');
 Route::post('/userloginpost', [CustomAuthenticationController::class, 'userloginpost'])->name('userlogin.post');
-
 Route::get('/userregistration', [CustomAuthenticationController::class, 'userregistration'])->name('userregistration')->middleware('isuserloggedin');
 Route::post('/userregistration', [CustomAuthenticationController::class, 'userregistrationpost'])->name('userregistration.post');
 Route::get('/userlogout', [CustomAuthenticationController::class, 'userlogout'])->name('userlogout');
 
 
+Route::get('/adminLogin', [CustomAuthenticationController::class, 'adminlogin'])->name('adminlogin');
+Route::post('/adminloginpost', [CustomAuthenticationController::class, 'adminloginpost'])->name('adminlogin.post');
+Route::get('/adminlogout', [CustomAuthenticationController::class, 'adminlogout'])->name('adminlogout');
 
 
 
@@ -57,6 +59,9 @@ Route::get('/userlogout', [CustomAuthenticationController::class, 'userlogout'])
 
 
 
+
+
+Route::middleware([ 'isuserloggedin' , 'user'])->group(function() {
 
 
 Route::get('/', [IndexController::class, 'Index'])->name('home');
@@ -64,6 +69,7 @@ Route::get('/dashboard', [UserController::class, 'UserDashboard'])->name('dashbo
 Route::post('/user/profile/store', [UserController::class, 'UserProfileStore'])->name('user.profile.store');
 Route::get('/user/logout', [UserController::class, 'UserLogout'])->name('user.logout');
 Route::post('/user/update/password', [UserController::class, 'UserUpdatePassword'])->name('user.update.password');
+}); // Gorup Milldeware End
 
 
 Route::middleware(['auth', 'verified'])->group(function() {
@@ -86,7 +92,7 @@ require __DIR__.'/authentication.php';
 
 //admin dashboard
 
-//Route::middleware(['auth', 'role:admin'])->group(function () {
+//Route::middleware(['admin' ,'isadminloggedin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
 
     Route::get('/admin/logout', [AdminController::class, 'AdminDestroy'])->name('admin.logout');

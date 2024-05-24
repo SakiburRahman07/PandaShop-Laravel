@@ -459,73 +459,63 @@ $reviews = App\Models\Review::where('product_id',$product->id)->latest()->limit(
     <div class="comment-form">
         <h4 class="mb-15">Add a review</h4>
 
-    @guest
-    <p> <b>For Add Product Review. You Need To Login First <a href="{{ route('login')}}">Login Here </a> </b></p>
+        @if(session()->has('user_id'))
+    <div class="row">
+        <div class="col-lg-8 col-md-12">
+            <form class="form-contact comment_form" action="{{ route('store.review') }}" method="post" id="commentForm">
+                @csrf
 
-    @else 
+                <div class="row">
 
-        
-        <div class="row">
-            <div class="col-lg-8 col-md-12">
-       <form class="form-contact comment_form" action="{{ route('store.review') }}" method="post" id="commentForm">
-        @csrf
+                    <input type="hidden" name="product_id" value="{{ $product->id }}">
 
+                    @if($product->vendor_id == NULL)
+                        <input type="hidden" name="vendor_id" value="">
+                    @else
+                        <input type="hidden" name="vendor_id" value="{{ $product->vendor_id }}">
+                    @endif
 
-                    <div class="row">
+                    <table class="table" style="width: 60%;">
+                        <thead>
+                            <tr>
+                                <th class="cell-level">&nbsp;</th>
+                                <th>1 star</th>
+                                <th>2 star</th>
+                                <th>3 star</th>
+                                <th>4 star</th>
+                                <th>5 star</th>
+                            </tr>
+                        </thead>
 
-    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                        <tbody>
+                            <tr>
+                                <td class="cell-level">Quality</td>
+                                <td><input type="radio" name="quality" class="radio-sm" value="1"></td>
+                                <td><input type="radio" name="quality" class="radio-sm" value="2"></td>
+                                <td><input type="radio" name="quality" class="radio-sm" value="3"></td>
+                                <td><input type="radio" name="quality" class="radio-sm" value="4"></td>
+                                <td><input type="radio" name="quality" class="radio-sm" value="5"></td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-     @if($product->vendor_id == NULL)
-     <input type="hidden" name="hvendor_id" value="">
-     @else
-     <input type="hidden" name="hvendor_id" value="{{ $product->vendor_id }}">
-     @endif
-
-    <table class="table" style=" width: 60%;">
-        <thead>
-            <tr>
-                <th class="cell-level">&nbsp;</th>
-                <th>1 star</th>
-                <th>2 star</th>
-                <th>3 star</th>
-                <th>4 star</th>
-                <th>5 star</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr>
-    <td class="cell-level">Quality</td>
-    <td><input type="radio" name="quality" class="radio-sm" value="1"></td>
-    <td><input type="radio" name="quality" class="radio-sm" value="2"></td>
-    <td><input type="radio" name="quality" class="radio-sm" value="3"></td>
-    <td><input type="radio" name="quality" class="radio-sm" value="4"></td>
-    <td><input type="radio" name="quality" class="radio-sm" value="5"></td>
-            </tr>
-        </tbody>
-    </table>
-
-
-
-
-
-
-    <div class="col-12">
-        <div class="form-group">
-            <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9" placeholder="Write Comment"></textarea>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9" placeholder="Write Comment"></textarea>
+                        </div>
+                    </div>
+                        
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="button button-contactForm">Submit Review</button>
+                </div>
+            </form>
         </div>
     </div>
-                        
-                         
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="button button-contactForm">Submit Review</button>
-                    </div>
-                </form>
-            </div>
-        </div>
+@else
+    <p><b>For Add Product Review. You Need To Login First <a href="{{ route('login') }}">Login Here</a></b></p>
+@endif
 
-  @endguest
 
 
     </div>
