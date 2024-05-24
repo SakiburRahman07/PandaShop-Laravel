@@ -18,7 +18,7 @@ class VendorProductController extends Controller
     
     public function VendorAllProduct(){
 
-        $id = Auth::user()->id;
+        $id = session('vendor_id');
         $products = Product::where('vendor_id',$id)->latest()->get();
         return view('vendor.backend.product.vendor_product_all',compact('products'));
     } // End Method 
@@ -89,7 +89,7 @@ class VendorProductController extends Controller
 
       //  Image::make($image)->resize(800,800)->save('upload/products/thambnail/'.$name_gen);
         $save_url = 'upload/products/thambnail/'.$name_gen;
-
+        $vendor_id = session('vendor_id');
         $product_id = Product::insertGetId([
 
             'brand_id' => $request->brand_id,
@@ -115,7 +115,7 @@ class VendorProductController extends Controller
             'special_deals' => $request->special_deals, 
 
             'product_thambnail' => $save_url,
-            'vendor_id' => Auth::user()->id,
+            'vendor_id' => $vendor_id,
             'status' => 1,
             'created_at' => Carbon::now(), 
 

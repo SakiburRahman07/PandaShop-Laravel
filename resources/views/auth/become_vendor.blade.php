@@ -45,7 +45,7 @@
                                         </div>
 
 
- <form method="POST" action="{{ route('vendor.register') }}">
+ <form method="POST" action="{{ route('vendorregistration.post') }}">
             @csrf
 
 

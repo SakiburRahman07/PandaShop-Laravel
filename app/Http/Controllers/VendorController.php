@@ -38,7 +38,7 @@ class VendorController extends Controller
 
     public function VendorProfile(){
 
-        $id = Auth::user()->id;
+        $id = session('vendor_id');
         $vendorData = User::find($id);
         return view('vendor.vendor_profile_view',compact('vendorData'));
 
@@ -46,7 +46,7 @@ class VendorController extends Controller
 
     public function VendorProfileStore(Request $request){
 
-        $id = Auth::user()->id;
+        $id = session('vendor_id');
         $data = User::find($id);
         $data->name = $request->name;
         $data->email = $request->email;

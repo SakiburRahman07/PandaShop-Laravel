@@ -50,6 +50,14 @@ Route::get('/adminLogin', [CustomAuthenticationController::class, 'adminlogin'])
 Route::post('/adminloginpost', [CustomAuthenticationController::class, 'adminloginpost'])->name('adminlogin.post');
 Route::get('/adminlogout', [CustomAuthenticationController::class, 'adminlogout'])->name('adminlogout');
 
+Route::get('/vendorlogin', [CustomAuthenticationController::class, 'vendorlogin'])->name('vendorlogin')->middleware('isvendorloggedin');
+//->middleware('isuserloggedin');
+Route::post('/vendorloginpost', [CustomAuthenticationController::class, 'vendorloginpost'])->name('vendorlogin.post');
+Route::get('/vendorregistration', [CustomAuthenticationController::class, 'vendorregistration'])->name('vendorregistration');
+//->middleware('isuserloggedin');
+Route::post('/vendorregistration', [CustomAuthenticationController::class, 'vendorregistrationpost'])->name('vendorregistration.post');
+Route::get('/vendorlogout', [CustomAuthenticationController::class, 'vendorlogout'])->name('vendorlogout');
+
 
 
 
@@ -108,7 +116,7 @@ require __DIR__.'/authentication.php';
 //vendor dashboard
 
 //Route::middleware(['auth', 'role:vendor'])->group(function () {
-    Route::get('/vendor/dashboard', [VendorController::class, 'VendorDashboard'])->name('vendor.dashboard');
+    Route::get('/vendor/dashboard', [VendorController::class, 'VendorDashboard'])->name('vendor.dashboard')->middleware('vendor');
     Route::get('/vendor/logout', [VendorController::class, 'VendorDestroy'])->name('vendor.logout');
     Route::get('/vendor/profile', [VendorController::class, 'VendorProfile'])->name('vendor.profile');
     Route::post('/vendor/profile/store', [VendorController::class, 'VendorProfileStore'])->name('vendor.profile.store');
