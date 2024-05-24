@@ -2,8 +2,8 @@
 @section('vendor')
 
 @php
-	$id = Auth::user()->id;
-	$verdorId = App\Models\User::find($id);
+	$id = session('vendor_id');
+	$verdorId = \App\Models\User::find($id);
 	$status = $verdorId->status; 
 @endphp
 
@@ -19,7 +19,7 @@ $currentYear = Carbon::now()->year;
 $pendingtotal = App\Models\Order::where('status', 'pending')->get();
 
 
-$id = Auth::user()->id;
+$id = session('vendor_id');
 $vendorId = App\Models\User::find($id);
 
 $pending = App\Models\Order::where('id', $vendorId)
@@ -258,7 +258,7 @@ $fractionorder = count($pending) !=0 ? (count($pendingtotal) / count($pending)) 
 									@php
 									use App\Models\Order;
 									use Illuminate\Support\Facades\Auth;
-									$id = Auth::user()->id;
+									$id = session('vendor_id');
 									$orders=Order::where('id', $id)->get();
 									@endphp
 					

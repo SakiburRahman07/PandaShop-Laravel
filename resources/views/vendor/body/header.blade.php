@@ -57,7 +57,9 @@
 							<li class="nav-item dropdown dropdown-large">
 								<a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <span class="alert-count">
  @php
-$ncount = Auth::user()->unreadNotifications()->count()
+ $id = session('vendor_id');
+$vendor = \App\Models\User::find($id);
+$ncount = $vendor->unreadNotifications()->count()
 @endphp
 {{ $ncount }}</span>
 									<i class='bx bx-bell'></i>
@@ -74,7 +76,8 @@ $ncount = Auth::user()->unreadNotifications()->count()
 	<div class="header-notifications-list">
 
 			 @php
-			 $user = Auth::user();
+			 $id = session('vendor_id');
+			$user = \App\Models\User::find($id);
 			 @endphp
 		 
 		 @forelse($user->notifications as $notification)
@@ -254,7 +257,7 @@ $ncount = Auth::user()->unreadNotifications()->count()
 
 
 	@php
-	    $id = Auth::user()->id;
+	$id = session('vendor_id');
         $vendorData = App\Models\User::find($id);
 	
 	@endphp				
@@ -267,8 +270,12 @@ $ncount = Auth::user()->unreadNotifications()->count()
 
 
 							<div class="user-info ps-3">
-		<p class="user-name mb-0">{{ Auth::user()->name }}</p>
-		<p class="designattion mb-0">{{ Auth::user()->username }}</p>
+								@php 
+								$id = session('vendor_id');
+								$vendor = \App\Models\User::find($id);
+								@endphp
+		<p class="user-name mb-0">{{ $vendor->name }}</p>
+		<p class="designattion mb-0">{{ $vendor->username }}</p>
 							</div>
 						</a>
 		<ul class="dropdown-menu dropdown-menu-end">
@@ -285,7 +292,7 @@ $ncount = Auth::user()->unreadNotifications()->count()
 			<li>
 				<div class="dropdown-divider mb-0"></div>
 			</li>
-			<li><a class="dropdown-item" href="{{ route('vendor.logout') }}"><i class='bx bx-log-out-circle'></i><span>Logout</span></a>
+			<li><a class="dropdown-item" href="{{ route('vendorlogout') }}"><i class='bx bx-log-out-circle'></i><span>Logout</span></a>
 			</li>
 		</ul>
 					</div>

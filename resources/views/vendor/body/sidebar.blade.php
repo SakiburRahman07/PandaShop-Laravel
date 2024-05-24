@@ -1,6 +1,7 @@
 
 @php
-	$id = Auth::user()->id;
+$id = session('vendor_id');
+
 	$verdorId = App\Models\User::find($id);
 	$status = $verdorId->status; 
 @endphp

@@ -20,6 +20,9 @@ return Application::configure(basePath: dirname(__DIR__))
             'isuserloggedin' => \App\Http\Middleware\isAlreadyLoggedInUser::class,
             'admin' => \App\Http\Middleware\adminCheck::class,
             'isadminloggedin' => \App\Http\Middleware\isAlreadyLoggesInAdmin::class,
+            'vendor' => \App\Http\Middleware\VendorCheck::class,	
+            'isvendorloggedin' => \App\Http\Middleware\isAlreadyLoggedinVendor::class,
+
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

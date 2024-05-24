@@ -14,14 +14,14 @@ class VendorOrderController extends Controller
 {
     public function VendorOrder(){
 
-        $id = Auth::user()->id;
+        $id = session('vendor_id');
         $orderitem = OrderItem::with('order')->where('vendor_id',$id)->orderBy('id','DESC')->get();
         return view('vendor.backend.orders.pending_orders',compact('orderitem'));
     } // End Method 
 
     public function VendorReturnOrder(){
 
-        $id = Auth::user()->id;
+        $id = session('vendor_id');
        $orderitem = OrderItem::with('order')->where('vendor_id',$id)->orderBy('id','DESC')->get();
        return view('vendor.backend.orders.return_orders',compact('orderitem'));
 
@@ -29,7 +29,7 @@ class VendorOrderController extends Controller
 
    public function VendorCompleteReturnOrder(){
 
-    $id = Auth::user()->id;
+    $id = session('vendor_id');
    $orderitem = OrderItem::with('order')->where('vendor_id',$id)->orderBy('id','DESC')->get();
    return view('vendor.backend.orders.complete_return_orders',compact('orderitem'));
 
