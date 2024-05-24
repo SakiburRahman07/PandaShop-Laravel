@@ -343,7 +343,7 @@
                 </div>
                 <div class="shopping-cart-title" style="margin: -73px 74px 14px; width" 146px;>
                     <h4><a href="shop-product-right.html"> ${value.product.product_name} </a></h4>
-                    <h4><span>${value.quantity} × </span>${value.product.selling_price}</h4>
+                    <h4><span>${value.quantity} × </span>${value.product.discount_price ? value.product.discount_price : value.product.selling_price}</h4>
                 </div>
                 <div class="shopping-cart-delete" style="margin: -85px 1px 0px;">
                     <a type="submit" id="${value.id}" onclick="miniCartRemove(this.id)"  ><i class="fi-rs-cross-small"></i></a>
@@ -777,7 +777,7 @@ function wishlistRemove(id){
                 
             </td>
             <td class="price" data-title="Price">
-                <h4 class="text-body">$${value.product.selling_price} </h4>
+                <h4 class="text-body">   $${value.product.discount_price ? value.product.discount_price : value.product.selling_price} </h4>
             </td>
 
               <td class="price" data-title="Price">
@@ -809,8 +809,7 @@ function wishlistRemove(id){
                 </div>
             </td>
             <td class="price" data-title="Price">
-                <h4 class="text-brand">$${value.product.selling_price*value.quantity} </h4>
-            </td>
+                <h4 class="text-brand">$${(value.product.discount_price ? value.product.discount_price : value.product.selling_price)*value.quantity} </h4>
             <td class="action text-center" data-title="Remove">
             <a type="submit" class="text-body"  id="${value.id}" onclick="cartRemove(this.id)"><i class="fi-rs-trash"></i></a></td>
         </tr>`  
