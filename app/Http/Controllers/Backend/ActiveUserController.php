@@ -16,7 +16,7 @@ class ActiveUserController extends Controller
     } // End Mehtod 
 
     public function AllVendor(){
-        
+
         $vendors = User::where('role','vendor')->latest()->get();
         return view('backend.user.vendor_all_data',compact('vendors'));
 
@@ -32,7 +32,6 @@ class ActiveUserController extends Controller
         }
         
         $user->delete();
-        
         $notification = [
             'message' => 'User Deleted Successfully',
             'alert-type' => 'success'
