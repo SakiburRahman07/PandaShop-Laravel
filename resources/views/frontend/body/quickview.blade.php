@@ -92,7 +92,6 @@
         </div> <!-- // end row -->
 
 
-        
     </div>
                             <!-- Detail Info -->
                         </div>
