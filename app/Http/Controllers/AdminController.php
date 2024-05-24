@@ -40,16 +40,16 @@ class AdminController extends Controller
     //end method 
 
     public function AdminProfile(){
-
-        $id = Auth::user()->id;
+        $id = session('admin_id');
+       
         $adminData = User::find($id);
         return view('admin.admin_profile_view',compact('adminData'));
 
     } // End Mehtod 
 
     public function AdminProfileStore(Request $request){
-
-        $id = Auth::user()->id;
+        $id = session('admin_id');
+        
         $data = User::find($id);
         $data->name = $request->name;
         $data->email = $request->email;

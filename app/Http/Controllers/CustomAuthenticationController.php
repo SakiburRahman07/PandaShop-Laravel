@@ -28,7 +28,12 @@ class CustomAuthenticationController extends Controller
     
         $user = User::where('email', '=', $request->email)->first();
 
-        if(!($user->role == 'user'))
+        if(!$user)
+        {
+            return redirect()->back()->with('error', 'Invalid Email.');
+        }
+
+       else if(!($user->role == 'user'))
         {
             return redirect()->back()->with('error', 'Not a user.');
         }
@@ -87,4 +92,60 @@ class CustomAuthenticationController extends Controller
         }
         return redirect()->route('userlogin');
     }
+
+
+    public function adminlogin()
+    {
+        return view('admin.admin_login');
+    }
+
+    public function adminloginpost(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+    
+        $user = User::where('email', '=', $request->email)->first();
+
+        if(!$user)
+        {
+            return redirect()->back()->with('error', 'Invalid Email.');
+        }
+
+       else if(!($user->role == 'admin'))
+        {
+            return redirect()->back()->with('error', 'Not a admin.');
+        }
+
+
+        else if($user)
+        {
+            if(Hash::check($request->password, $user->password) && $user->role == 'admin')
+            {
+                Session::put('admin_id', $user->id);
+               
+                return view('admin.index');
+            }
+            else
+            {
+                return redirect()->back()->with('error', 'Invalid password.');
+            }
+
+        }
+        else 
+        {
+            return redirect()->back()->with('error', 'Invalid email');
+        }
+    }
+
+    public function adminlogout()
+    {
+        if(Session::has('admin_id'))
+        {
+            Session::pull('admin_id');
+        }
+        return view('admin.admin_login');
+    }
+
 }

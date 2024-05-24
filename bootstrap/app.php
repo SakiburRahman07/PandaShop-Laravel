@@ -18,6 +18,8 @@ return Application::configure(basePath: dirname(__DIR__))
             'role' => \App\Http\Middleware\Role::class,
             'user' => \App\Http\Middleware\UserCheck::class,	
             'isuserloggedin' => \App\Http\Middleware\isAlreadyLoggedInUser::class,
+            'admin' => \App\Http\Middleware\adminCheck::class,
+            'isadminloggedin' => \App\Http\Middleware\isAlreadyLoggesInAdmin::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

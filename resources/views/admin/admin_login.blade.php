@@ -41,7 +41,7 @@
 						
 							
 									<div class="form-body">
-                                    <form class="row g-3" method="POST" action="{{ route('login') }}">
+                                    <form class="row g-3" method="POST" action="{{ route('adminlogin.post') }}">
         @csrf
 		 <!-- Display success and not found messages -->
 		 @if (session('status'))

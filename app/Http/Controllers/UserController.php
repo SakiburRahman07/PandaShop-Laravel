@@ -24,8 +24,8 @@ class UserController extends Controller
     } // End Method 
 
     public function UserProfileStore(Request $request){
-
-        $id = Auth::user()->id;
+        
+        $id = session('user_id');
         $data = User::find($id);
         $data->name = $request->name;
         $data->username = $request->username;
