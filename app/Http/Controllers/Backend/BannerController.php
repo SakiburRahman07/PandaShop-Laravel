@@ -203,5 +203,5 @@ public function DeleteBanner($id){
 
     return redirect()->back()->with($notification); 
 
-}// End Method 
+}// End Method of 
 }
