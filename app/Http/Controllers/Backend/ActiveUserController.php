@@ -32,6 +32,7 @@ class ActiveUserController extends Controller
         }
         
         $user->delete();
+        
         $notification = [
             'message' => 'User Deleted Successfully',
             'alert-type' => 'success'
