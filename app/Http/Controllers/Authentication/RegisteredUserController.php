@@ -95,7 +95,6 @@ class RegisteredUserController extends Controller
 
 //     // Log the user in
 //     Auth::login($user);
-
 //     // Send a notification to admin users about the new registration
 //     $adminUsers = User::where('role', 'admin')->get();
 //     Notification::send($adminUsers, new RegisterUserNotification($request));
