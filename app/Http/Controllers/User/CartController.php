@@ -325,7 +325,6 @@ public function CartIncrement($rowId) {
     return response()->json('Increment successful');
 }
 
-
 public function CouponApply(Request $request)
 {
     $id = session('user_id');
