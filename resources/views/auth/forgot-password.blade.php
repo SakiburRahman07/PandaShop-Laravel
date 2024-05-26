@@ -18,7 +18,6 @@
 </head>
 
 <body>
-    
     <!-- Quick view -->
    @include('frontend.body.header')
     <!--End header-->
