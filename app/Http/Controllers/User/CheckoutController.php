@@ -17,6 +17,7 @@ class CheckoutController extends Controller
 
     } // End Method 
 
+    
     public function StateGetAjax($district_id){
 
         $ship = ShipState::where('district_id',$district_id)->orderBy('state_name','ASC')->get();
