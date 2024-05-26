@@ -231,7 +231,7 @@ class CustomAuthenticationController extends Controller
         {
             return redirect()->back()->with('error', 'Invalid email');
         }
-    }
+    } // end methos
 
     public function vendorlogout()
     {
