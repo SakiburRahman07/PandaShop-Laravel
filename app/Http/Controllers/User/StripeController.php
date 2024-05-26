@@ -10,7 +10,6 @@ use App\Models\OrderItem;
 use App\Models\Cartbox;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
 use App\Notifications\OrderComplete;

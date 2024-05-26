@@ -110,9 +110,8 @@ public function VendorUpdatePassword(Request $request){
     } // End Mehtod 
 
     public function VendorRegister(Request $request) {
-
+        
         $vuser = User::where('role','admin')->get();
-
 
         $request->validate([
             'name' => ['required', 'string', 'max:255'],

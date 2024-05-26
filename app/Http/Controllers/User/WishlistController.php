@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Wishlist;
 use App\Models\Product; // Ensure to import the Product model
-use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
 class WishlistController extends Controller
