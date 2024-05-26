@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Models\Review;
 use App\Models\Order;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
 {
