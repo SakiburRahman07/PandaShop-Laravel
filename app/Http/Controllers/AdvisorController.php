@@ -45,7 +45,6 @@ class AdvisorController extends Controller
 
 
 // <?php
-
 // namespace App\Http\Controllers;
 
 // use Illuminate\Http\Request;
