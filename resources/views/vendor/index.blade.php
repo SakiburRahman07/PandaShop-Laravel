@@ -265,7 +265,6 @@ $fractionorder = count($pending) !=0 ? (count($pendingtotal) / count($pending)) 
 									@foreach($orders as $key => $order)								
 	<tr>
 		<td>{{ $key+1 }}</td>
-		 
 		<td>{{ $order->order_date }}</td>
 		<td>{{ $order->invoice_no }}</td>
 		<td>${{ $order->amount }}</td>
