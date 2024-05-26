@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\PasswordResetAdmin;
-//use Illuminate\Auth\Notifications\ResetPassword;
 use App\Http\Requests\ResetPassword;
 
 class AdminController extends Controller
