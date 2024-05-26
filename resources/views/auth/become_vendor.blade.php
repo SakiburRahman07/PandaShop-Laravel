@@ -48,7 +48,6 @@
  <form method="POST" action="{{ route('vendorregistration.post') }}">
             @csrf
 
-
     <div class="form-group">
         <input type="text" id="name" required="" name="name" placeholder="Shop Name" />
     </div>
