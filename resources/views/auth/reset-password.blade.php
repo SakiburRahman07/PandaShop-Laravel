@@ -16,7 +16,6 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/main.css?v=5.3') }}" />
 </head>
-
 <body>
     <!-- Quick view -->
    @include('frontend.body.header')
