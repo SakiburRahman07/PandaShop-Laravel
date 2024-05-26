@@ -20,7 +20,6 @@ class CompareController extends Controller
                 'user_id' => session('user_id'),
                 'product_id' => $product_id,
                 'created_at' => Carbon::now(),
-
                ]);
                return response()->json(['success' => 'Successfully Added On Your Compare' ]);
             } else{
