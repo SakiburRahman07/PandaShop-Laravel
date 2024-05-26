@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use App\Models\OrderItem; 
 use Illuminate\Support\Facades\Session;
 use Carbon\Carbon;
-use Auth;
 use App\Models\Product;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
