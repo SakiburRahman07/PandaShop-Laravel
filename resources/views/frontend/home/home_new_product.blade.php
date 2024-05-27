@@ -157,6 +157,10 @@ $catwiseProduct = App\Models\Product::where('category_id',$category->id)->orderB
 @endphp
         
         @forelse($catwiseProduct as $product)
+        @php
+    $ven_status = App\Models\User::where('id', $product->vendor_id)->value('status');
+    @endphp
+    @if($ven_status == 'active')
         <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
         <div class="product-cart-wrap mb-30 wow animate__animated animate__fadeIn" data-wow-delay=".1s">
             <div class="product-img-action-wrap">
@@ -238,7 +242,7 @@ $catwiseProduct = App\Models\Product::where('category_id',$category->id)->orderB
         </div>
     </div> 
     <!--end product card-->
-
+    @endif
         @empty
 
         <h5 class="text-danger"> No Product Found </h5>
