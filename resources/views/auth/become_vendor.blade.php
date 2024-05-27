@@ -48,6 +48,16 @@
  <form method="POST" action="{{ route('vendorregistration.post') }}">
             @csrf
 
+            @if (session('status'))
+         <div class="alert alert-success" role="alert">
+                {{session('status')}}
+         </div>
+         @elseif(session('error'))
+         <div class="alert alert-danger" role="alert">
+            {{session('error')}}
+         </div>
+         @endif
+
     <div class="form-group">
         <input type="text" id="name" required="" name="name" placeholder="Shop Name" />
     </div>

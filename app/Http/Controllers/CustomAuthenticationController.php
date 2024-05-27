@@ -164,7 +164,11 @@ class CustomAuthenticationController extends Controller
 
         $vuser = User::where('role','admin')->get();
 
-
+        $isemail = User::where('email', $request->email)->first();
+        if($isemail)
+        {
+            return redirect()->back()->with('error', 'Email already exists.');
+        }
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
