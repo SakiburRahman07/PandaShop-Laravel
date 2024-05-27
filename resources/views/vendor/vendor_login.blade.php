@@ -48,6 +48,16 @@
 
         <form class="row g-3" method="POST" action="{{ route('vendorlogin.post') }}">
             @csrf
+
+            @if (session('status'))
+         <div class="alert alert-success" role="alert">
+                {{session('status')}}
+         </div>
+         @elseif(session('error'))
+         <div class="alert alert-danger" role="alert">
+            {{session('error')}}
+         </div>
+         @endif
         
             <div class="col-12">
                 <label for="inputEmailAddress" class="form-label">Email Address</label>
