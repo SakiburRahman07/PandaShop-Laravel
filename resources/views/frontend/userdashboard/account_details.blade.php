@@ -50,7 +50,7 @@
     </div>
     <div class="form-group col-md-12">
         <label>Email <span class="required">*</span></label>
-        <input required="" class="form-control" name="email" type="text" value="{{ $userData->email }}" />
+        <input required="" class="form-control" name="email" type="text" value="{{ $userData->email }}" disabled />
     </div>
     <div class="form-group col-md-12">
         <label>Phone <span class="required">*</span></label>

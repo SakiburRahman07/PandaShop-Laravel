@@ -58,7 +58,7 @@
 					<h6 class="mb-0">Vendor Email</h6>
 				</div>
 				<div class="col-sm-9 text-secondary">
-					<input type="email" name="email" class="form-control" value="{{ $inactiveVendorDetails->email }}" />
+					<input type="email" name="email" class="form-control" value="{{ $inactiveVendorDetails->email }}" disabled />
 				</div>
 			</div>
 			<div class="row mb-3">
