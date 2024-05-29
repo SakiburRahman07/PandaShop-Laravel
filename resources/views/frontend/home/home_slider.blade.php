@@ -15,10 +15,12 @@ $slider = App\Models\Slider::orderBy('slider_title','ASC')->get();
                                 {{ $item->slider_title }}
                             </h1>
                             <p class="mb-65">{{ $item->short_title }}</p>
-                            <form class="form-subcriber d-flex">
-                                <input type="email" placeholder="Your emaill address" />
-                                <button class="btn" type="submit">Subscribe</button>
-                            </form>
+                            <form class="form-subcriber d-flex" action="{{ route('subscribe.post') }}" method="post">
+    @csrf
+    <input type="email" id="email" name="email" placeholder="Your email address" />
+    <button class="btn" type="submit">Subscribe</button>
+</form>
+
                         </div>
                     </div>
                     @endforeach

@@ -44,6 +44,10 @@
 
                         @if(isset($skip_product_0))
     @foreach($skip_product_0 as $product)
+    @php
+    $ven_status = App\Models\User::where('id', $product->vendor_id)->value('status');
+    @endphp
+    @if($ven_status == 'active')
     <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
         <div class="product-cart-wrap mb-30 wow animate__animated animate__fadeIn" data-wow-delay=".1s">
             <div class="product-img-action-wrap">
@@ -148,6 +152,7 @@ $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1
         </div>
     </div> 
     <!--end product card-->
+    @endif
     @endforeach
     @else
     <h4>New product comming soon.</h4>
@@ -190,6 +195,10 @@ $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1
 
     @if(isset($skip_product_2))
     @foreach($skip_product_2 as $product)
+    @php
+    $ven_status = App\Models\User::where('id', $product->vendor_id)->value('status');
+    @endphp
+    @if($ven_status == 'active')
     <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
         <div class="product-cart-wrap mb-30 wow animate__animated animate__fadeIn" data-wow-delay=".1s">
             <div class="product-img-action-wrap">
@@ -290,6 +299,7 @@ $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1
         </div>
     </div> 
     <!--end product card-->
+    @endif
     @endforeach
     @else
     <h4>New product comming soon.</h4>
@@ -336,6 +346,10 @@ $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1
 
                         @if(isset($skip_product_7))
     @foreach($skip_product_7 as $product)
+    @php
+    $ven_status = App\Models\User::where('id', $product->vendor_id)->value('status');
+    @endphp
+    @if($ven_status == 'active')
     <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
         <div class="product-cart-wrap mb-30 wow animate__animated animate__fadeIn" data-wow-delay=".1s">
             <div class="product-img-action-wrap">
@@ -436,6 +450,7 @@ $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1
         </div>
     </div> 
     <!--end product card-->
+    @endif
     @endforeach
     @else
     <h4>New product comming soon.</h4>
@@ -470,7 +485,11 @@ $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1
                         <h4 class="section-title style-1 mb-30 animated animated"> Hot Deals </h4>
                         <div class="product-list-small animated animated">
                             
-         @foreach($hot_deals as $item)                   
+         @foreach($hot_deals as $item)      
+         @php
+    $ven_status = App\Models\User::where('id', $item->vendor_id)->value('status');
+    @endphp
+    @if($ven_status == 'active')             
     <article class="row align-items-center hover-up">
         <figure class="col-md-4 mb-0">
             <a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug) }}"><img src="{{ asset( $item->product_thambnail ) }}" alt="" /></a>
@@ -517,6 +536,7 @@ $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1
                     @endif
         </div>
     </article>
+    @endif
     @endforeach
 
 
@@ -532,7 +552,11 @@ $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1
                         <div class="product-list-small animated animated">
                             
 
-      @foreach($special_offer as $item)                   
+      @foreach($special_offer as $item)              
+      @php
+    $ven_status = App\Models\User::where('id', $item->vendor_id)->value('status');
+    @endphp
+    @if($ven_status == 'active')     
     <article class="row align-items-center hover-up">
         <figure class="col-md-4 mb-0">
             <a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug) }}"><img src="{{ asset( $item->product_thambnail ) }}" alt="" /></a>
@@ -579,6 +603,7 @@ $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1
                     @endif
         </div>
     </article>
+    @endif
     @endforeach
 
 
@@ -591,6 +616,10 @@ $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1
                            
 
   @foreach($new as $item)                   
+  @php
+    $ven_status = App\Models\User::where('id', $item->vendor_id)->value('status');
+    @endphp
+    @if($ven_status == 'active')
     <article class="row align-items-center hover-up">
         <figure class="col-md-4 mb-0">
             <a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug) }}"><img src="{{ asset( $item->product_thambnail ) }}" alt="" /></a>
@@ -637,6 +666,7 @@ $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1
                     @endif
         </div>
     </article>
+    @endif
     @endforeach
 
 
@@ -648,7 +678,11 @@ $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1
                         <div class="product-list-small animated animated">
                             
 
-  @foreach($special_deals as $item)                   
+  @foreach($special_deals as $item)           
+  @php
+    $ven_status = App\Models\User::where('id', $item->vendor_id)->value('status');
+    @endphp
+    @if($ven_status == 'active')        
     <article class="row align-items-center hover-up">
         <figure class="col-md-4 mb-0">
             <a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug) }}"><img src="{{ asset( $item->product_thambnail ) }}" alt="" /></a>
@@ -695,6 +729,7 @@ $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1
                     @endif
         </div>
     </article>
+    @endif
     @endforeach
 
 

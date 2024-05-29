@@ -13,6 +13,12 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\PasswordResetAdmin;
 use App\Http\Requests\ResetPassword;
+use App\Models\Order;
+use App\Models\OrderItem;
+use App\Mail\OrderCancelMail;
+use App\Models\Product;
+
+
 
 class AdminController extends Controller
 {
@@ -152,9 +158,48 @@ class AdminController extends Controller
      public function InActiveVendorApprove(Request $request){
 
         $verdor_id = $request->id;
+
+        $orderItem = OrderItem::where('vendor_id',$verdor_id)->orderBy('id','DESC')->get();
+        foreach($orderItem as $item){
+
+            $orderid = $item->order_id;
+            $userid = Order::findOrFail($orderid)->user_id;
+            $email = User::findOrFail($userid)->email;
+
+            OrderItem::findOrFail($item->order_id)->delete();
+            $u = User::findOrFail($item->vendor_id);
+            $vendor_name = $u->name;
+            $pname = Product::findOrFail($item->product_id)->product_name;
+            $data = [
+                
+                'product_id' => $pname,
+                'order_id' => $item->order_id,
+                'vendor_name' => $vendor_name,
+                'color' => $item->color,
+                'size' => $item->size,
+                'qty' => $item->qty,
+                'price' => $item->price,
+                'created_at' => $item->created_at
+    
+            ];
+
+            Mail::to($email)->send(new OrderCancelMail($data));
+
+
+        }
+
+
+        // $orders = Order::where('vendor_id', $verdor_id)->get();
+
+        // foreach ($orders as $order) {
+        //     $order->update(['status' => 'cancel']);
+        // }
+
         $user = User::findOrFail($verdor_id)->update([
             'status' => 'inactive',
         ]);
+
+
 
         $notification = array(
             'message' => 'Vendor InActive Successfully',

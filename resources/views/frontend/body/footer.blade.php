@@ -15,10 +15,12 @@ $setting = App\Models\SiteSetting::find(1);
                                     needs from our shop
                                 </h2>
                                 <p class="mb-45">Start You'r Daily Shopping with <span class="text-brand">PandaShop</span></p>
-                                <form class="form-subcriber d-flex">
-                                    <input type="email" placeholder="Your emaill address" />
-                                    <button class="btn" type="submit">Subscribe</button>
-                                </form>
+                                <form class="form-subcriber d-flex" action="{{ route('subscribe.post') }}" method="post">
+    @csrf
+    <input type="email" id="email" name="email" placeholder="Your email address" />
+    <button class="btn" type="submit">Subscribe</button>
+</form>
+
                             </div>
                             <img src="{{ asset('frontend/assets/imgs/banner/banner-9.png') }}" alt="newsletter" />
                         </div>

@@ -27,9 +27,9 @@ class ActiveUserController extends Controller
         $user = User::findOrFail($id);
         $img = public_path('upload/user_images/') . $user->photo;
         
-        if (file_exists($img)) {
-            unlink($img); 
-        }
+        // if (file_exists($img)) {
+        //     unlink($img); 
+        // }
         
         $user->delete();
         
@@ -46,9 +46,9 @@ class ActiveUserController extends Controller
         $user = User::findOrFail($id);
         $img = public_path('upload/vendor_images/') . $user->photo;
         
-        if (file_exists($img)) {
-            unlink($img); 
-        }
+        // if (file_exists($img)) {
+        //     unlink($img); 
+        // }
         
         $user->delete();
         

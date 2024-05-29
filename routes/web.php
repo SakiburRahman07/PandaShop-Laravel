@@ -75,8 +75,14 @@ Route::get('/', [IndexController::class, 'Index'])->name('home');
 Route::get('/dashboard', [UserController::class, 'UserDashboard'])->name('dashboard')->middleware('user');
 Route::post('/user/profile/store', [UserController::class, 'UserProfileStore'])->name('user.profile.store');
 Route::get('/user/logout', [UserController::class, 'UserLogout'])->name('user.logout');
+
+
 Route::post('/user/update/password', [UserController::class, 'UserUpdatePassword'])->name('user.update.password');
 }); // Gorup Milldeware End
+
+
+Route::post('/user/subscribe', [CustomAuthenticationController::class, 'UserSubscribe'])->name('subscribe.post');
+Route::post('/msg/sent', [CustomAuthenticationController::class, 'MsgSent'])->name('msg.post');
 
 
 Route::middleware(['auth', 'verified'])->group(function() {

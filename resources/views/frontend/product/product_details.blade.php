@@ -535,6 +535,10 @@ $reviews = App\Models\Review::where('product_id',$product->id)->latest()->limit(
 
 
  @foreach($relatedProduct as $product)
+ @php
+    $ven_status = App\Models\User::where('id', $product->vendor_id)->value('status');
+    @endphp
+    @if($ven_status == 'active')
 <div class="col-lg-3 col-md-4 col-12 col-sm-6">
     <div class="product-cart-wrap hover-up">
         <div class="product-img-action-wrap">
@@ -590,6 +594,7 @@ $reviews = App\Models\Review::where('product_id',$product->id)->latest()->limit(
         </div>
     </div>
 </div>
+@endif
 @endforeach
 
 

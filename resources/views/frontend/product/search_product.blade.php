@@ -58,6 +58,10 @@
 
 
 		@foreach($products as $item)
+		@php
+    $ven_status = App\Models\User::where('id', $item->vendor_id)->value('status');
+    @endphp
+    @if($ven_status == 'active')
 		<a href="{{ url('product/details/'.$item->id.'/'.$item->product_slug) }}">
 			<div class="list border-bottom">
 				<img src="{{ asset($item->product_thambnail) }}" style="width:40px; height:40px">
@@ -69,6 +73,7 @@
 				
 			</div> 
 		</a>
+		@endif
 		@endforeach
 
 					
