@@ -33,7 +33,8 @@
     <section class="product-tabs section-padding position-relative">
             <div class="container">
                 <div class="section-title style-2 wow animate__animated animate__fadeIn">
-                    <h3>{{ $skip_category_0->category_name }} Category </h3>
+                  
+                    <h3>{{ isset($skip_category_0) ? $skip_category_0->category_name . ' Category' : '' }}</h3>
                    
                 </div>
                 <!--End nav-tabs-->
@@ -41,7 +42,7 @@
                     <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
                         <div class="row product-grid-4">
 
-
+                        @if(isset($skip_product_0))
     @foreach($skip_product_0 as $product)
     <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
         <div class="product-cart-wrap mb-30 wow animate__animated animate__fadeIn" data-wow-delay=".1s">
@@ -148,6 +149,9 @@ $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1
     </div> 
     <!--end product card-->
     @endforeach
+    @else
+    <h4>New product comming soon.</h4>
+    @endif
 
 
 
@@ -175,7 +179,8 @@ $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1
    <section class="product-tabs section-padding position-relative">
             <div class="container">
                 <div class="section-title style-2 wow animate__animated animate__fadeIn">
-                    <h3>{{ $skip_category_2->category_name }} Category </h3>
+                <h3>{{ isset($skip_category_2) ? $skip_category_2->category_name . ' Category' : '' }}</h3>
+
                    
                 </div>
                 <!--End nav-tabs-->
@@ -183,7 +188,7 @@ $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1
                     <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
                         <div class="row product-grid-4">
 
-
+    @if(isset($skip_product_2))
     @foreach($skip_product_2 as $product)
     <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
         <div class="product-cart-wrap mb-30 wow animate__animated animate__fadeIn" data-wow-delay=".1s">
@@ -286,6 +291,9 @@ $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1
     </div> 
     <!--end product card-->
     @endforeach
+    @else
+    <h4>New product comming soon.</h4>
+    @endif
 
 
 
@@ -317,7 +325,8 @@ $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1
    <section class="product-tabs section-padding position-relative">
             <div class="container">
                 <div class="section-title style-2 wow animate__animated animate__fadeIn">
-                    <h3>{{ $skip_category_7->category_name }} Category </h3>
+                <h3>{{ isset($skip_category_7) ? $skip_category_7->category_name . ' Category' : '' }}</h3>
+                   
                    
                 </div>
                 <!--End nav-tabs-->
@@ -325,7 +334,7 @@ $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1
                     <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
                         <div class="row product-grid-4">
 
-
+                        @if(isset($skip_product_7))
     @foreach($skip_product_7 as $product)
     <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
         <div class="product-cart-wrap mb-30 wow animate__animated animate__fadeIn" data-wow-delay=".1s">
@@ -428,6 +437,9 @@ $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1
     </div> 
     <!--end product card-->
     @endforeach
+    @else
+    <h4>New product comming soon.</h4>
+    @endif
 
 
 

@@ -22,6 +22,13 @@ return new class extends Migration
             $table->string('qty');
             $table->float('price',8,2); 
             $table->timestamps();
+
+            $table->foreign('product_id')
+            ->references('id')
+            ->on('products')
+            ->onDelete('cascade');
+
+            
         });
     }
 
