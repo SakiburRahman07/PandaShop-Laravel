@@ -52,7 +52,7 @@
 				<td>
 <a href="{{ route('admin.order.details',$item->id) }}" class="btn btn-info" title="Details"><i class="fa fa-eye"></i> </a>
 
-<a href="{{ route('admin.order.cancel',$item->id) }}" class="btn btn-cancel" title="Details"><i class="fa fa-eye"></i> </a>
+<a href="{{ route('admin.order.cancel',$item->id) }}" class="btn btn-danger" title="Cancel"><i class="fa-solid fa-ban" style="color: #000000;"></i></i></i> </a>
  
 
 				</td> 
