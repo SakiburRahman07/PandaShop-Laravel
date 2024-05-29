@@ -41,8 +41,30 @@ return new class extends Migration
             $table->string('cancel_date')->nullable();
             $table->string('return_date')->nullable();
             $table->string('return_reason')->nullable();
+            $table->string('return_order')->nullable()->default('0');
             $table->string('status'); 
             $table->timestamps();
+
+            $table->foreign('user_id')
+            ->references('id')
+            ->on('users')
+            ->onDelete('cascade');
+
+            $table->foreign('division_id')
+            ->references('id')
+            ->on('ship_divisions')
+            ->onDelete('cascade');
+
+            $table->foreign('district_id')
+            ->references('id')
+            ->on('ship_districts')
+            ->onDelete('cascade');
+
+            $table->foreign('state_id')
+            ->references('id')
+            ->on('ship_states')
+            ->onDelete('cascade');
+
         });
     }
 

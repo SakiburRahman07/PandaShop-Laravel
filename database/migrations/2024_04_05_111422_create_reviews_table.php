@@ -27,6 +27,8 @@ return new class extends Migration
             $table->string('status')->default(0);
             $table->integer('vendor_id')->nullable();   
             $table->timestamps();
+
+            
         });
     }
 
