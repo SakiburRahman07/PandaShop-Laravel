@@ -145,6 +145,22 @@
 
 		</form>
 
+		<form  action="{{ route('msg.post') }}" method="post">
+    @csrf
+	<div class="row mb-3">
+				<div class="col-sm-3">
+					<h6 class="mb-0">   Sent mail to subscriber </h6>
+				</div>
+				<div class="col-sm-9 text-secondary">
+				<textarea type="text" id="email" name="email" value="Hi there!" row="15" cols="60">  </textarea>
+				<br><br>
+    			<button class="btn btn-primary px-4" type="submit">Sent</button>
+				</div>
+			</div>
+ 
+	</form>
+
+
 
 
 	</div>

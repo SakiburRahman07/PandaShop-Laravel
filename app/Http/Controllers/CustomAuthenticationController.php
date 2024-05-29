@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SubscribeMail;
+use App\Models\Subscribe;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use App\Notifications\VendorRegNotification;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Mail;
+
 
 class CustomAuthenticationController extends Controller
 {
@@ -244,6 +248,46 @@ class CustomAuthenticationController extends Controller
             Session::pull('vendor_id');
         }
         return view('vendor.vendor_login');
+    }
+
+
+    public function UserSubscribe(Request $request)
+    {
+        $email = $request->email;
+    
+        // Check if the email already exists
+        $existingSubscription = Subscribe::where('email', $email)->first();
+    
+        if ($existingSubscription) {
+            return redirect()->back()->with('info', 'You are already subscribed.');
+        }
+    
+        // Insert the email if it doesn't exist
+        Subscribe::create([
+            'email' => $email,
+        ]);
+    
+        return redirect()->back()->with('success', 'Subscribed Successfully.');
+    }
+
+    public function MsgSent (Request $request)
+    {
+        
+        
+        $data = [
+
+            'mess' => $request->email
+        ];
+
+        $recipients = Subscribe::all();
+
+        foreach ($recipients as $recipient) {
+            Mail::to($recipient->email)->send(new SubscribeMail($data));
+        }
+
+        return redirect()->back()->with('success', 'Message sent successfully.');
+
+
     }
 
 
