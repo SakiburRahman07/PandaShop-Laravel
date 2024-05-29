@@ -59,6 +59,19 @@ class OrderController extends Controller
 
     }// End Method 
 
+    public function AdminOrderCancel($order_id){
+        Order::findOrFail($order_id)->update(['status' => 'cancel']);
+
+        $notification = array(
+            'message' => 'Order Cancel Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('admin.confirmed.order')->with($notification); 
+
+
+    }// End Method 
+
     public function ConfirmToProcess($order_id){
         Order::findOrFail($order_id)->update(['status' => 'processing']);
 

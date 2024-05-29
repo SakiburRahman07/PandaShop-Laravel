@@ -330,6 +330,9 @@ Route::controller(ShippingAreaController::class)->group(function(){
 Route::controller(OrderController::class)->group(function(){
     Route::get('/pending/order' , 'PendingOrder')->name('pending.order');
     Route::get('/admin/order/details/{order_id}' , 'AdminOrderDetails')->name('admin.order.details');
+
+    Route::get('/admin/order/cancel/{order_id}' , 'AdminOrderCancel')->name('admin.order.cancel');
+
     Route::get('/admin/confirmed/order' , 'AdminConfirmedOrder')->name('admin.confirmed.order');
     Route::get('/admin/processing/order' , 'AdminProcessingOrder')->name('admin.processing.order');
     Route::get('/admin/delivered/order' , 'AdminDeliveredOrder')->name('admin.delivered.order');
