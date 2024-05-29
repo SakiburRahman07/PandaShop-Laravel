@@ -16,6 +16,12 @@ return new class extends Migration
             $table->unsignedBigInteger('division_id');
             $table->string('district_name');
             $table->timestamps();
+
+            $table->foreign('division_id')
+            ->references('id')
+            ->on('ship_divisions')
+            ->onDelete('cascade');
+            
         });
     }
 

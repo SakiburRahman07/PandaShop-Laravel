@@ -13,9 +13,14 @@ return new class extends Migration
     {
         Schema::create('multi_imgs', function (Blueprint $table) {
             $table->id();
-            $table->integer('product_id');
+            $table->unsignedBigInteger('product_id');
             $table->string('photo_name');
             $table->timestamps();
+
+            $table->foreign('product_id')
+            ->references('id')
+            ->on('products')
+            ->onDelete('cascade');
         });
     }
 
