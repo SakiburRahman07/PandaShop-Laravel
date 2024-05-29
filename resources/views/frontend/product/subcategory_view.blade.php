@@ -71,6 +71,10 @@
 
 
           @foreach($products as $product)
+          @php
+    $ven_status = App\Models\User::where('id', $product->vendor_id)->value('status');
+    @endphp
+    @if($ven_status == 'active')
     <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
         <div class="product-cart-wrap mb-30 wow animate__animated animate__fadeIn" data-wow-delay=".1s">
             <div class="product-img-action-wrap">
@@ -153,6 +157,7 @@
         </div>
     </div> 
     <!--end product card-->
+    @endif
     @endforeach
 
 
@@ -211,6 +216,10 @@ $products = App\Models\Product::where('category_id',$category->id)->get();
                         <h5 class="section-title style-1 mb-30">New products</h5>
                         
         @foreach($newProduct as $product)
+        @php
+    $ven_status = App\Models\User::where('id', $product->vendor_id)->value('status');
+    @endphp
+    @if($ven_status == 'active')
         <div class="single-post clearfix">
             <div class="image">
                 <img src="{{ asset( $product->product_thambnail ) }}" alt="#" />
@@ -229,6 +238,7 @@ $products = App\Models\Product::where('category_id',$category->id)->get();
                 </div>
             </div>
         </div>
+        @endif
       @endforeach
 
 

@@ -29,6 +29,10 @@ $featured = App\Models\Product::where('featured',1)->orderBy('id','DESC')->limit
                                         
 
     @foreach($featured as $product)
+    @php
+    $ven_status = App\Models\User::where('id', $product->vendor_id)->value('status');
+    @endphp
+    @if($ven_status == 'active')
         <div class="product-cart-wrap">
             <div class="product-img-action-wrap">
                 <div class="product-img product-img-zoom">
@@ -119,6 +123,7 @@ $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1
             </div>
         </div>
         <!--End product Wrap-->
+        @endif
         @endforeach
 
 
