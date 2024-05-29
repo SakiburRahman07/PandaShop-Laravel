@@ -65,6 +65,8 @@
 <span class="badge rounded-pill bg-dark">Processing</span>
 @elseif($order->status == 'deliverd')
 <span class="badge rounded-pill bg-success">Deliverd</span>
+@elseif($order->status == 'cancel')
+<span class="badge rounded-pill bg-danger">Canceled </span>
 
 @if($order->return_order == 1)
 <span class="badge rounded-pill " style="background:red;">Return</span>
