@@ -17,6 +17,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Mail\OrderCancelMail;
 use App\Models\Product;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 
 
@@ -155,60 +156,114 @@ class AdminController extends Controller
     }// End Mehtod 
 
 
-     public function InActiveVendorApprove(Request $request){
+    //  public function InActiveVendorApprove(Request $request){
 
-        $verdor_id = $request->id;
+    //     $verdor_id = $request->id;
 
-        $orderItem = OrderItem::where('vendor_id',$verdor_id)->orderBy('id','DESC')->get();
-        foreach($orderItem as $item){
+    //     $orderItem = OrderItem::where('vendor_id',$verdor_id)->orderBy('id','DESC')->get();
+    //     foreach($orderItem as $item){
 
-            $orderid = $item->order_id;
-            $userid = Order::findOrFail($orderid)->user_id;
-            $email = User::findOrFail($userid)->email;
+    //         $orderid = $item->order_id;
+    //         $userid = Order::findOrFail($orderid)->user_id;
+    //         $email = User::findOrFail($userid)->email;
 
-            OrderItem::findOrFail($item->order_id)->delete();
-            $u = User::findOrFail($item->vendor_id);
-            $vendor_name = $u->name;
-            $pname = Product::findOrFail($item->product_id)->product_name;
-            $data = [
+    //         OrderItem::findOrFail($item->order_id)->delete();
+    //         $u = User::findOrFail($item->vendor_id);
+    //         $vendor_name = $u->name;
+    //         $pname = Product::findOrFail($item->product_id)->product_name;
+    //         $data = [
                 
-                'product_id' => $pname,
-                'order_id' => $item->order_id,
-                'vendor_name' => $vendor_name,
-                'color' => $item->color,
-                'size' => $item->size,
-                'qty' => $item->qty,
-                'price' => $item->price,
-                'created_at' => $item->created_at
+    //             'product_id' => $pname,
+    //             'order_id' => $item->order_id,
+    //             'vendor_name' => $vendor_name,
+    //             'color' => $item->color,
+    //             'size' => $item->size,
+    //             'qty' => $item->qty,
+    //             'price' => $item->price,
+    //             'created_at' => $item->created_at
     
-            ];
+    //         ];
 
-            Mail::to($email)->send(new OrderCancelMail($data));
+    //         Mail::to($email)->send(new OrderCancelMail($data));
+
+    //     }
 
 
+    //     // $orders = Order::where('vendor_id', $verdor_id)->get();
+
+    //     // foreach ($orders as $order) {
+    //     //     $order->update(['status' => 'cancel']);
+    //     // }
+
+    //     $user = User::findOrFail($verdor_id)->update([
+    //         'status' => 'inactive',
+    //     ]);
+
+
+
+    //     $notification = array(
+    //         'message' => 'Vendor InActive Successfully',
+    //         'alert-type' => 'success'
+    //     );
+
+    //     return redirect()->route('inactive.vendor')->with($notification);
+
+    // }// End Mehtod 
+
+    public function InActiveVendorApprove(Request $request){
+        $vendor_id = $request->id;
+    
+        // Fetch all order items for the given vendor
+        $orderItems = OrderItem::where('vendor_id', $vendor_id)->orderBy('id', 'DESC')->get();
+    
+        foreach($orderItems as $item){
+            try {
+                $orderid = $item->order_id;
+                $order = Order::findOrFail($orderid); // Fetch the order
+                $userid = $order->user_id;
+                $user = User::findOrFail($userid); // Fetch the user
+                $email = $user->email;
+    
+                // Delete the order item by its id, not order_id
+                OrderItem::findOrFail($item->id)->delete();
+    
+                $vendor = User::findOrFail($item->vendor_id);
+                $vendor_name = $vendor->name;
+                $product = Product::findOrFail($item->product_id);
+                $pname = $product->product_name;
+    
+                $data = [
+                    'product_id' => $pname,
+                    'order_id' => $item->order_id,
+                    'vendor_name' => $vendor_name,
+                    'color' => $item->color,
+                    'size' => $item->size,
+                    'qty' => $item->qty,
+                    'price' => $item->price,
+                    'created_at' => $item->created_at
+                ];
+    
+                Mail::to($email)->send(new OrderCancelMail($data));
+            } catch (ModelNotFoundException $e) {
+                // Log or handle the exception as needed
+                return redirect()->route('inactive.vendor')->with([
+                    'message' => 'Error: Record not found',
+                    'alert-type' => 'error'
+                ]);
+            }
         }
-
-
-        // $orders = Order::where('vendor_id', $verdor_id)->get();
-
-        // foreach ($orders as $order) {
-        //     $order->update(['status' => 'cancel']);
-        // }
-
-        $user = User::findOrFail($verdor_id)->update([
-            'status' => 'inactive',
-        ]);
-
-
-
+    
+        // Update vendor status to inactive
+        User::findOrFail($vendor_id)->update(['status' => 'inactive']);
+    
         $notification = array(
             'message' => 'Vendor InActive Successfully',
             'alert-type' => 'success'
         );
-
+    
         return redirect()->route('inactive.vendor')->with($notification);
-
-    }// End Mehtod 
+    } // End Method
+    
 
 
     //---------------------------------------------------admin panel er password neye kaj-----------------------------
